@@ -17,7 +17,7 @@ fun ClickableIcon(
 ) {
     val view = LocalView.current
     IconButton(modifier = modifier, onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
         onClick()
     }) {
         Icon(imageVector, contentDescription)
