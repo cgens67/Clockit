@@ -55,9 +55,6 @@ fun AlarmTimePicker(
                 /**
                  * Hour value in 24 hour format 0-23
                  */
-                /**
-                 * Hour value in 24 hour format 0-23
-                 */
                 var hours = remember { initialHours }
                 ScrollTimePicker(
                     value = if (is24Hour) initialHours else initialHours % 24,
@@ -130,7 +127,7 @@ fun MeridiemPicker(
     val view = LocalView.current
     val currentPage = state.currentPage + 1
     LaunchedEffect(currentPage) {
-        view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
         onValueChanged(Meridiem.entries[currentPage % 2])
     }
     VerticalPager(
