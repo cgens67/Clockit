@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Pause
@@ -81,7 +80,7 @@ fun StopwatchScreen(onClickSettings: () -> Unit, stopwatchModel: StopwatchModel)
                     LapTable(
                         modifier = Modifier
                             .heightIn(0.dp, 300.dp)
-                            .fillMaxWidth(0.8f)
+                            .fillMaxWidth(0.9f)
                             .padding(bottom = 30.dp), stopwatchModel, timeStampsState
                     )
                 }
@@ -210,11 +209,9 @@ private fun LapTable(
 ) {
     LazyColumn(
         modifier = modifier
-            .clip(
-                RoundedCornerShape(16.dp)
-            )
+            .clip(MaterialTheme.shapes.large)
             .background(MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp))
-            .padding(16.dp),
+            .padding(24.dp),
         state = timeStampsState
     ) {
         item {
@@ -236,13 +233,13 @@ private fun LapTable(
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
-                HorizontalDivider()
+                HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
             }
         }
         itemsIndexed(stopwatchModel.rememberedTimeStamps) { index, time ->
             Row(
                 modifier = Modifier
-                    .padding(vertical = 6.dp)
+                    .padding(vertical = 8.dp)
             ) {
                 Text(
                     String.format("%02d", index + 1),
@@ -293,18 +290,18 @@ private fun TimeDisplay(
                 if (hours > 0) {
                     Text(
                         text = hours.toString(),
-                        style = MaterialTheme.typography.displayLarge
+                        style = MaterialTheme.typography.displayMedium
                     )
-                    Text(text = ":", style = MaterialTheme.typography.displayLarge)
+                    Text(text = ":", style = MaterialTheme.typography.displayMedium)
                 }
                 Text(
                     text = if (hours > 0) minutes.addZero() else minutes.toString(),
-                    style = MaterialTheme.typography.displayLarge
+                    style = MaterialTheme.typography.displayMedium
                 )
-                Text(text = ":", style = MaterialTheme.typography.displayLarge)
+                Text(text = ":", style = MaterialTheme.typography.displayMedium)
                 Text(
                     text = seconds.addZero(),
-                    style = MaterialTheme.typography.displayLarge
+                    style = MaterialTheme.typography.displayMedium
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -315,10 +312,11 @@ private fun TimeDisplay(
         }
         if (showProgress) {
             CircularProgressIndicator(
-                progress = (stopwatchModel.currentPosition % 60000) / 60000f,
+                progress = { (stopwatchModel.currentPosition % 60000) / 60000f },
                 modifier = Modifier
                     .heightIn(0.dp, 320.dp)
                     .aspectRatio(1f, true),
+                color = MaterialTheme.colorScheme.primary,
                 trackColor = MaterialTheme.colorScheme.surfaceVariant,
                 strokeWidth = 12.dp,
                 strokeCap = StrokeCap.Round
