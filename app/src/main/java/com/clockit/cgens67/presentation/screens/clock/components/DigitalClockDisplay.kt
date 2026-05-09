@@ -10,7 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -31,10 +33,18 @@ fun DigitalClockDisplay() {
                 }
             })
         Text(
-            text = dateTime.second, style = MaterialTheme.typography.displayMedium
+            text = dateTime.second, 
+            style = MaterialTheme.typography.displayLarge.copy(
+                fontSize = 68.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = (-1.5).sp
+            ),
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
-            text = dateTime.first, style = MaterialTheme.typography.bodyLarge
+            text = dateTime.first, 
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }
