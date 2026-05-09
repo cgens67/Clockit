@@ -2,6 +2,7 @@ package com.clockit.cgens67.presentation.screens.timer
 
 import android.content.Context
 import android.content.res.Configuration
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -23,7 +24,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.rounded.Add
@@ -45,10 +45,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.clockit.cgens67.R
@@ -63,6 +62,7 @@ import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 import com.clockit.cgens67.util.Preferences
 import com.clockit.cgens67.util.extensions.KeepScreenOn
 import com.clockit.cgens67.util.extensions.fadingEdge
+import com.clockit.cgens67.util.extensions.performHaptic
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -241,7 +241,7 @@ private fun PresetTimers(
     onCreateNew: () -> Unit,
     context: Context
 ) {
-    val haptic = LocalHapticFeedback.current
+    val view = LocalView.current
     LazyVerticalGrid(
         modifier = Modifier
             .heightIn(0.dp, 200.dp)
@@ -254,17 +254,16 @@ private fun PresetTimers(
         itemsIndexed(items = timerModel.persistentTimers) { index, timer ->
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(16.dp))
+                    .clip(MaterialTheme.shapes.large)
                     .combinedClickable(
                         onClick = {
+                            view.performHaptic()
                             timerModel.timePickerSeconds = timer.seconds
                             onCreateNew.invoke()
                             timerModel.startTimer(context)
                         },
                         onLongClick = {
-                            haptic.performHapticFeedback(
-                                HapticFeedbackType.LongPress
-                            )
+                            view.performHaptic(HapticFeedbackConstants.LONG_PRESS)
                             timerModel.removePersistentTimer(index)
                         }
                     )
