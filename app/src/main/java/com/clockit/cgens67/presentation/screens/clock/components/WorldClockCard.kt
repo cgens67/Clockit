@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -36,13 +35,13 @@ fun WorldClockCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp)
-            .clip(RoundedCornerShape(20.dp))
-            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp))
+            .clip(RoundedCornerShape(32.dp))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 16.dp)
+                .padding(horizontal = 24.dp, vertical = 20.dp)
         ) {
             val dateTime by produceState(
                 initialValue = clockModel.getDateWithOffset(timeZone.zoneId)
@@ -60,14 +59,15 @@ fun WorldClockCard(
                 Column(Modifier.weight(1f)) {
                     Text(
                         text = timeZone.zoneName,
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        style = MaterialTheme.typography.headlineSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = timeZone.countryName,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f),
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -82,7 +82,7 @@ fun WorldClockCard(
                 ) {
                     Text(
                         modifier = Modifier.padding(
-                            horizontal = 16.dp, vertical = 8.dp
+                            horizontal = 18.dp, vertical = 10.dp
                         ),
                         text = dateTime.second,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -90,15 +90,17 @@ fun WorldClockCard(
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             val context = LocalContext.current
             Text(
                 text = TimeHelper.formatHourDifference(
                     context, timeZone
-                ), style = MaterialTheme.typography.bodyLarge
+                ), style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
             )
             Text(
-                text = dateTime.first, style = MaterialTheme.typography.bodyMedium
+                text = dateTime.first, style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
             )
         }
     }
