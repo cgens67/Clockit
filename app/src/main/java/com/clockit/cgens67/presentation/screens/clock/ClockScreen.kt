@@ -30,6 +30,7 @@ import com.clockit.cgens67.presentation.screens.clock.components.TimeZoneSelectD
 import com.clockit.cgens67.presentation.screens.clock.components.WorldClockItem
 import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
 import com.clockit.cgens67.util.Preferences
+import com.clockit.cgens67.util.extensions.fadingEdge
 
 @Composable
 fun ClockScreen(
@@ -56,7 +57,7 @@ fun ClockScreen(
             modifier = Modifier
                 .padding(horizontal = 12.dp, vertical = 6.dp)
                 .padding(pv)
-                .com.clockit.cgens67.util.extensions.fadingEdge(
+                .fadingEdge(
                     isVisibleTop = listState.canScrollBackward,
                     isVisibleBottom = listState.canScrollForward,
                     length = 100f
