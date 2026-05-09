@@ -1,4 +1,4 @@
-package com.bnyro.clock.ui.theme
+package com.clockit.cgens67.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -34,23 +34,19 @@ fun ClockYouTheme(
                 customColorScheme.copy(background = Color.Black, surface = Color.Black)
             }
         }
-
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
         else -> customColorScheme
     }
+    
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val activity = view.context as Activity
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val insetsController = WindowCompat.getInsetsController(
-                    activity.window,
-                    view
-                )
+                val insetsController = WindowCompat.getInsetsController(activity.window, view)
                 insetsController.isAppearanceLightStatusBars = !darkTheme
                 insetsController.isAppearanceLightNavigationBars = !darkTheme
             }
@@ -60,6 +56,7 @@ fun ClockYouTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = ExpressiveShapes,
         content = content
     )
 }
