@@ -61,7 +61,7 @@ fun WorldClockItem(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(vertical = 6.dp)
-                    .clip(RoundedCornerShape(20.dp))
+                    .clip(RoundedCornerShape(32.dp))
                     .background(MaterialTheme.colorScheme.errorContainer),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Start
@@ -69,7 +69,8 @@ fun WorldClockItem(
                 Icon(
                     imageVector = Icons.Rounded.DeleteOutline,
                     contentDescription = null,
-                    modifier = Modifier.padding(start = 16.dp),
+                    modifier = Modifier.padding(start = 24.dp),
+                    tint = MaterialTheme.colorScheme.onErrorContainer
                 )
             }
         })
