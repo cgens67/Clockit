@@ -1,6 +1,5 @@
 package com.clockit.cgens67.presentation.screens.settings.components
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import com.clockit.cgens67.util.Preferences
+import com.clockit.cgens67.util.extensions.performHaptic
 
 @Composable
 fun SwitchPref(
@@ -40,9 +40,10 @@ fun SwitchPref(
                 interactionSource = interactionSource,
                 indication = null
             ) {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                view.performHaptic()
                 checked = !checked
                 Preferences.edit { putBoolean(prefKey, checked) }
+                onCheckedChange.invoke(checked)
             },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -55,7 +56,7 @@ fun SwitchPref(
         Switch(
             checked = checked,
             onCheckedChange = {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                view.performHaptic()
                 checked = it
                 Preferences.edit { putBoolean(prefKey, it) }
                 onCheckedChange.invoke(it)
