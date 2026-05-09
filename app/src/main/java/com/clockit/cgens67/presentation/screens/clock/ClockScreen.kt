@@ -50,10 +50,17 @@ fun ClockScreen(
     }) { pv ->
 
         val selectedZones by clockModel.selectedTimeZones.collectAsState()
+        val listState = androidx.compose.foundation.lazy.rememberLazyListState()
         LazyColumn(
+            state = listState,
             modifier = Modifier
                 .padding(horizontal = 12.dp, vertical = 6.dp)
                 .padding(pv)
+                .com.clockit.cgens67.util.extensions.fadingEdge(
+                    isVisibleTop = listState.canScrollBackward,
+                    isVisibleBottom = listState.canScrollForward,
+                    length = 100f
+                )
         ) {
             item {
                 DigitalClockDisplay()
