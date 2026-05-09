@@ -113,10 +113,17 @@ fun TimerScreen(onClickSettings: () -> Unit, timerModel: TimerModel) {
                 )
             }
         } else {
+            val listState = androidx.compose.foundation.lazy.rememberLazyListState()
             LazyColumn(
+                state = listState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .com.clockit.cgens67.util.extensions.fadingEdge(
+                        isVisibleTop = listState.canScrollBackward,
+                        isVisibleBottom = listState.canScrollForward,
+                        length = 100f
+                    ),
                 verticalArrangement = Arrangement.Top
             ) {
                 items(scheduledObjects, key = { it.id }) { obj ->
