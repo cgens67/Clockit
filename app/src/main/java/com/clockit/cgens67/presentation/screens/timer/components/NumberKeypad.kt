@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.clockit.cgens67.R
 import com.clockit.cgens67.domain.model.NumberKeypadOperation
+import com.clockit.cgens67.util.extensions.performHaptic
 import kotlinx.coroutines.launch
 
 @Composable
@@ -71,14 +72,14 @@ fun NumberKeypad(
             SingleElementButton(
                 onClick = {
                     coroutineScope.launch {
-                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                        view.performHaptic()
                     }
 
                     onOperation(NumberKeypadOperation.Delete)
                 },
                 onLongClick = {
                     coroutineScope.launch {
-                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                        view.performHaptic(HapticFeedbackConstants.LONG_PRESS)
                     }
 
                     onOperation(NumberKeypadOperation.Clear)
@@ -108,7 +109,7 @@ fun NumPadButton(
     SingleElementButton(
         onClick = {
             coroutineScope.launch {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                view.performHaptic()
             }
 
             onOperation(NumberKeypadOperation.AddNumber(number))
