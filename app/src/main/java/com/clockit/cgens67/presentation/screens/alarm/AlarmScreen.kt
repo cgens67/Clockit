@@ -90,10 +90,17 @@ fun AlarmScreen(
         if (alarms.isEmpty()) {
             BlobIconBox(icon = R.drawable.ic_alarm)
         }
+        val listState = androidx.compose.foundation.lazy.rememberLazyListState()
         LazyColumn(
-            Modifier
+            state = listState,
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(pv)
+                .com.clockit.cgens67.util.extensions.fadingEdge(
+                    isVisibleTop = listState.canScrollBackward,
+                    isVisibleBottom = listState.canScrollForward,
+                    length = 100f
+                )
         ) {
 
             item {
