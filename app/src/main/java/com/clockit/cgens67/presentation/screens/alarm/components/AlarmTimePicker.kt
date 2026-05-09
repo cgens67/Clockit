@@ -1,7 +1,6 @@
 package com.clockit.cgens67.presentation.screens.alarm.components
 
 import android.text.format.DateFormat
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -27,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.clockit.cgens67.presentation.screens.timer.components.ScrollTimePicker
+import com.clockit.cgens67.util.extensions.performHaptic
 
 /**
  * @param initialHours Initial Hours according to 24 hour format 0-23
@@ -127,7 +127,7 @@ fun MeridiemPicker(
     val view = LocalView.current
     val currentPage = state.currentPage + 1
     LaunchedEffect(currentPage) {
-        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+        view.performHaptic()
         onValueChanged(Meridiem.entries[currentPage % 2])
     }
     VerticalPager(
