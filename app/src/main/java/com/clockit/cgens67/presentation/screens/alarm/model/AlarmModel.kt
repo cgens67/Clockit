@@ -40,12 +40,14 @@ class AlarmModel(application: Application) : AndroidViewModel(application) {
     val alarms: StateFlow<List<Alarm>> =
         combine(alarmRepository.getAlarmsStream(), filters, sortOrder) { items, filter, sortOrder ->
             val filtered = items.filter { alarm ->
+                val query = filter.label.trim().lowercase()
+                val matchesLabel = alarm.label?.lowercase()?.contains(query) == true
+                val matchesTime = alarm.formattedTime.lowercase().contains(query)
+                val textMatch = query.isEmpty() || matchesLabel || matchesTime
+
                 (filter.startTime <= alarm.time && alarm.time <= filter.endTime)
                         && !Collections.disjoint(filter.weekDays, alarm.days)
-                        && (alarm.label?.lowercase()?.contains(filter.label.lowercase())
-                    ?: true) && (alarm.formattedTime.lowercase()
-                    .contains(filter.label.lowercase()))
-
+                        && textMatch
             }
 
             when (sortOrder) {
