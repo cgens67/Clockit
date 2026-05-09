@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FloatingActionButton
@@ -74,7 +75,7 @@ fun ClockScreen(
                 item {
                     Box(modifier = Modifier.fillParentMaxSize()) {
                         BlobIconBox(
-                            icon = R.drawable.ic_language,
+                            imageVector = Icons.Rounded.Language,
                             title = stringResource(R.string.no_world_clocks_yet),
                             subtitle = stringResource(R.string.no_world_clocks_subtitle)
                         )
