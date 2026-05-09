@@ -40,7 +40,7 @@ fun SwitchWithDivider(
     Surface(
         modifier = Modifier.clickable(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 onClick()
             }
         )
@@ -84,7 +84,7 @@ fun SwitchWithDivider(
             Switch(
                 checked = isChecked,
                 onCheckedChange = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     onChecked(it)
                 },
                 modifier = Modifier
@@ -110,7 +110,7 @@ fun SwitchItem(
         modifier = Modifier.toggleable(
             value = isChecked,
             onValueChange = {
-                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 onClick(it)
             }
         )
