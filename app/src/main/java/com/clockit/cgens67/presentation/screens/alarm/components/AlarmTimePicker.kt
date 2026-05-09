@@ -1,6 +1,7 @@
 package com.clockit.cgens67.presentation.screens.alarm.components
 
 import android.text.format.DateFormat
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -125,8 +127,10 @@ fun MeridiemPicker(
     val state = rememberPagerState(initialPage = 200 + value.ordinal + 1) {
         400
     }
+    val view = LocalView.current
     val currentPage = state.currentPage + 1
     LaunchedEffect(currentPage) {
+        view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
         onValueChanged(Meridiem.entries[currentPage % 2])
     }
     VerticalPager(
