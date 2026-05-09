@@ -32,6 +32,7 @@ import com.clockit.cgens67.presentation.components.ClickableIcon
 import com.clockit.cgens67.presentation.screens.alarm.components.AlarmFilterSection
 import com.clockit.cgens67.presentation.screens.alarm.components.AlarmItem
 import com.clockit.cgens67.presentation.screens.alarm.model.AlarmModel
+import com.clockit.cgens67.util.extensions.fadingEdge
 
 @Composable
 fun AlarmScreen(
@@ -96,7 +97,7 @@ fun AlarmScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(pv)
-                .com.clockit.cgens67.util.extensions.fadingEdge(
+                .fadingEdge(
                     isVisibleTop = listState.canScrollBackward,
                     isVisibleBottom = listState.canScrollForward,
                     length = 100f
