@@ -1,6 +1,8 @@
 package com.clockit.cgens67.navigation
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -31,9 +33,15 @@ fun AppNavHost(
     val stopwatchModel: StopwatchModel = viewModel()
     val clockModel: ClockModel = viewModel()
 
+    val animDuration = 600
+    val animEasing = FastOutSlowInEasing
+
     NavHost(navController, startDestination = startDestination, modifier = modifier) {
         
-        composable(NavRoutes.Welcome.route) {
+        composable(NavRoutes.Welcome.route,
+            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animDuration, easing = animEasing)) + fadeIn(animationSpec = tween(animDuration, easing = animEasing)) },
+            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animDuration, easing = animEasing)) + fadeOut(animationSpec = tween(animDuration, easing = animEasing)) }
+        ) {
             WelcomeScreen {
                 navController.navigate(NavRoutes.Permissions.route) {
                     popUpTo(NavRoutes.Welcome.route) { inclusive = true }
@@ -42,8 +50,8 @@ fun AppNavHost(
         }
         
         composable(NavRoutes.Home.route,
-            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Down) + fadeIn() },
-            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Up) + fadeOut() }
+            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animDuration, easing = animEasing)) + fadeIn(animationSpec = tween(animDuration, easing = animEasing)) },
+            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animDuration, easing = animEasing)) + fadeOut(animationSpec = tween(animDuration, easing = animEasing)) }
         ) {
             HomeNavContainer(
                 onNavigate = { navController.navigate(it) },
@@ -57,8 +65,8 @@ fun AppNavHost(
         }
         
         composable(NavRoutes.Settings.route,
-            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up) + fadeIn() },
-            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down) + fadeOut() }
+            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animDuration, easing = animEasing)) + fadeIn(animationSpec = tween(animDuration, easing = animEasing)) },
+            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animDuration, easing = animEasing)) + fadeOut(animationSpec = tween(animDuration, easing = animEasing)) }
         ) {
             SettingsScreen(
                 onClickBack = { navController.popBackStack() },
@@ -69,22 +77,22 @@ fun AppNavHost(
         }
         
         composable(NavRoutes.LanguagePicker.route,
-            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) + fadeIn() },
-            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) + fadeOut() }
+            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animDuration, easing = animEasing)) + fadeIn(animationSpec = tween(animDuration, easing = animEasing)) },
+            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animDuration, easing = animEasing)) + fadeOut(animationSpec = tween(animDuration, easing = animEasing)) }
         ) {
             LanguagePickerScreen(onBack = { navController.popBackStack() })
         }
 
         composable(NavRoutes.AlarmPicker.routeWithArgs, arguments = NavRoutes.AlarmPicker.args,
-            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up) + fadeIn() },
-            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down) + fadeOut() }
+            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animDuration, easing = animEasing)) + fadeIn(animationSpec = tween(animDuration, easing = animEasing)) },
+            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animDuration, easing = animEasing)) + fadeOut(animationSpec = tween(animDuration, easing = animEasing)) }
         ) {
             AlarmPickerScreen { navController.popBackStack() }
         }
 
         composable(NavRoutes.Permissions.route,
-            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up) + fadeIn() },
-            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down) + fadeOut() }
+            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animDuration, easing = animEasing)) + fadeIn(animationSpec = tween(animDuration, easing = animEasing)) },
+            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animDuration, easing = animEasing)) + fadeOut(animationSpec = tween(animDuration, easing = animEasing)) }
         ) {
             PermissionScreen {
                 navController.navigate(NavRoutes.Home.route) {
