@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.clockit.cgens67.R
 import com.clockit.cgens67.domain.model.TimeZoneSortOrder
 import com.clockit.cgens67.navigation.TopBarScaffold
+import com.clockit.cgens67.presentation.components.BlobIconBox
 import com.clockit.cgens67.presentation.components.ClickableIcon
 import com.clockit.cgens67.presentation.screens.clock.components.DigitalClockDisplay
 import com.clockit.cgens67.presentation.screens.clock.components.TimeZoneSelectDialog
@@ -39,9 +40,12 @@ fun ClockScreen(
     var showTimeZoneDialog by remember {
         mutableStateOf(false)
     }
+    val selectedZones by clockModel.selectedTimeZones.collectAsState()
 
     TopBarScaffold(title = stringResource(R.string.clock), onClickSettings, actions = {
-        TopBarActions(clockModel)
+        if (selectedZones.size >= 2) {
+            TopBarActions(clockModel)
+        }
     }, fab = {
         FloatingActionButton(onClick = {
             showTimeZoneDialog = true
@@ -50,7 +54,6 @@ fun ClockScreen(
         }
     }) { pv ->
 
-        val selectedZones by clockModel.selectedTimeZones.collectAsState()
         val listState = androidx.compose.foundation.lazy.rememberLazyListState()
         LazyColumn(
             state = listState,
@@ -66,6 +69,19 @@ fun ClockScreen(
             item {
                 DigitalClockDisplay()
             }
+            
+            if (selectedZones.isEmpty()) {
+                item {
+                    Box(modifier = Modifier.fillParentMaxSize()) {
+                        BlobIconBox(
+                            icon = R.drawable.ic_language,
+                            title = stringResource(R.string.no_world_clocks_yet),
+                            subtitle = stringResource(R.string.no_world_clocks_subtitle)
+                        )
+                    }
+                }
+            }
+            
             items(items = selectedZones, key = { it.key }) { timeZone ->
                 WorldClockItem(clockModel, timeZone)
             }
