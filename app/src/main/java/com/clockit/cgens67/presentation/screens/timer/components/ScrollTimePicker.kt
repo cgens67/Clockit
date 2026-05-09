@@ -33,7 +33,7 @@ fun ScrollTimePicker(
     val view = LocalView.current
     val currentPage = state.currentPage + 1
     LaunchedEffect(currentPage) {
-        view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
         onValueChanged((currentPage + offset) % maxValue)
     }
     VerticalPager(
