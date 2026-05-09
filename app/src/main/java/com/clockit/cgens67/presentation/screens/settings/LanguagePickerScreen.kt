@@ -81,7 +81,7 @@ fun LanguagePickerScreen(onBack: () -> Unit) {
                             else MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
                         )
                         .clickable {
-                            view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(tag))
                         }
                 ) {
