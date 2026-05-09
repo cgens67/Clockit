@@ -11,6 +11,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.clockit.cgens67.util.TimeHelper
@@ -35,11 +36,14 @@ fun DigitalClockDisplay() {
         Text(
             text = dateTime.second, 
             style = MaterialTheme.typography.displayLarge.copy(
-                fontSize = 68.sp,
+                fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                letterSpacing = (-1.5).sp
+                letterSpacing = 0.sp
             ),
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            maxLines = 1,
+            softWrap = false,
+            overflow = TextOverflow.Visible
         )
         Text(
             text = dateTime.first, 
