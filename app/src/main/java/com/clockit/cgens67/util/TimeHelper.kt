@@ -9,10 +9,12 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
 import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar
+import java.util.Locale
 import java.util.TimeZone
 import kotlin.math.abs
 import kotlin.time.Duration
@@ -41,8 +43,23 @@ object TimeHelper {
     fun formatDateTime(time: ZonedDateTime, showSeconds: Boolean): Pair<String, String> {
         val dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)
 
+        val timeFormatOverride = Preferences.instance.getString("timeFormatOverride", "System")
+
         val timeFormatter = if (showSeconds) {
-            DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
+            if (timeFormatOverride == "24h") {
+                DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+            } else if (timeFormatOverride == "12h") {
+                DateTimeFormatter.ofPattern("hh:mm:ss.SSS a")
+            } else {
+                val pattern = DateTimeFormatterBuilder.getLocalizedDateTimePattern(
+                    null,
+                    FormatStyle.MEDIUM,
+                    java.time.chrono.IsoChronology.INSTANCE,
+                    Locale.getDefault()
+                )
+                val millisPattern = pattern.replace("ss", "ss.SSS")
+                DateTimeFormatter.ofPattern(millisPattern)
+            }
         } else {
             DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
         }
