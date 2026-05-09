@@ -24,6 +24,7 @@ import com.clockit.cgens67.presentation.screens.settings.components.*
 import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
 import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 import com.clockit.cgens67.util.Preferences
+import com.clockit.cgens67.util.extensions.fadingEdge
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +56,7 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
                 .padding(pv)
-                .com.clockit.cgens67.util.extensions.fadingEdge(
+                .fadingEdge(
                     isVisibleTop = scrollState.canScrollBackward,
                     isVisibleBottom = scrollState.canScrollForward,
                     length = 100f
