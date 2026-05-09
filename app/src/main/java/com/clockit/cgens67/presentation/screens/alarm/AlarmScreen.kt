@@ -1,5 +1,10 @@
 package com.clockit.cgens67.presentation.screens.alarm
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -56,25 +61,27 @@ fun AlarmScreen(
         }
     }, actions = {
         Row {
-            Box {
-                ClickableIcon(
-                    imageVector = Icons.AutoMirrored.Filled.Sort
-                ) {
-                    alarmModel.showSortOrder = !alarmModel.showSortOrder
-                }
+            if (alarms.size >= 2) {
+                Box {
+                    ClickableIcon(
+                        imageVector = Icons.AutoMirrored.Filled.Sort
+                    ) {
+                        alarmModel.showSortOrder = !alarmModel.showSortOrder
+                    }
 
-                DropdownMenu(
-                    expanded = alarmModel.showSortOrder,
-                    onDismissRequest = { alarmModel.showSortOrder = false }
-                ) {
-                    AlarmSortOrder.entries.forEach { sortOrder ->
-                        DropdownMenuItem(
-                            text = { Text(stringResource(sortOrder.value)) },
-                            onClick = {
-                                alarmModel.setSortOrder(sortOrder)
-                                alarmModel.showSortOrder = false
-                            }
-                        )
+                    DropdownMenu(
+                        expanded = alarmModel.showSortOrder,
+                        onDismissRequest = { alarmModel.showSortOrder = false }
+                    ) {
+                        AlarmSortOrder.entries.forEach { sortOrder ->
+                            DropdownMenuItem(
+                                text = { Text(stringResource(sortOrder.value)) },
+                                onClick = {
+                                    alarmModel.setSortOrder(sortOrder)
+                                    alarmModel.showSortOrder = false
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -88,9 +95,6 @@ fun AlarmScreen(
         }
     }) { pv ->
 
-        if (alarms.isEmpty()) {
-            BlobIconBox(icon = R.drawable.ic_alarm)
-        }
         val listState = androidx.compose.foundation.lazy.rememberLazyListState()
         LazyColumn(
             state = listState,
@@ -104,8 +108,24 @@ fun AlarmScreen(
                 )
         ) {
 
+            if (alarms.isEmpty()) {
+                item {
+                    Box(modifier = Modifier.fillParentMaxSize()) {
+                        BlobIconBox(
+                            icon = R.drawable.ic_alarm,
+                            title = stringResource(R.string.no_alarms_yet),
+                            subtitle = stringResource(R.string.no_alarms_subtitle)
+                        )
+                    }
+                }
+            }
+
             item {
-                if (alarmModel.showFilter) {
+                AnimatedVisibility(
+                    visible = alarmModel.showFilter,
+                    enter = expandVertically() + fadeIn(),
+                    exit = shrinkVertically() + fadeOut()
+                ) {
                     AlarmFilterSection(
                         filters,
                         { alarmModel.updateLabelFilter(it) },
