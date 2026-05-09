@@ -9,10 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Label
-import androidx.compose.material.icons.filled.Label
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.clockit.cgens67.R
 import com.clockit.cgens67.domain.model.Alarm
 import com.clockit.cgens67.util.AlarmHelper
@@ -43,12 +40,12 @@ fun AlarmCard(
     ElevatedCard(
         onClick = onClick,
         modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-        shape = RoundedCornerShape(20.dp)
+        shape = MaterialTheme.shapes.extraLarge
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 15.dp, vertical = 10.dp),
+                .padding(horizontal = 15.dp, vertical = 18.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -71,66 +68,72 @@ fun AlarmCard(
                         Text(
                             text = it,
                             overflow = TextOverflow.Ellipsis,
-                            maxLines = 1
+                            maxLines = 1,
+                            style = MaterialTheme.typography.titleMedium
                         )
                     }
+                    Spacer(modifier = Modifier.height(4.dp))
                 }
-                Spacer(modifier = Modifier.height(5.dp))
                 Text(
                     text = alarm.formattedTime,
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontSize = 36.sp
+                    style = MaterialTheme.typography.displayMedium
                 )
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     modifier = Modifier.padding(start = 6.dp),
-                    text = "$relativeTimeString."
+                    text = "$relativeTimeString.",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
-            Row(Modifier.padding(horizontal = 8.dp)) {
-                when {
-                    !alarm.repeat -> {
-                        Text(text = stringResource(R.string.one_time))
-                    }
-
-                    alarm.isRepeatEveryday -> {
-                        Text(text = stringResource(R.string.repeating))
-                    }
-
-                    alarm.isWeekends -> {
-                        Text(text = stringResource(R.string.weekends))
-                    }
-
-                    alarm.isWeekdays -> {
-                        Text(text = stringResource(R.string.weekdays))
-                    }
-
-                    else -> {
-                        val daysOfWeek = remember {
-                            AlarmHelper.getDaysOfWeekByLocale(context)
+            Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.Center) {
+                Switch(
+                    checked = isAlarmEnabled,
+                    onCheckedChange = onEnable
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                Row(Modifier.padding(horizontal = 8.dp)) {
+                    when {
+                        !alarm.repeat -> {
+                            Text(text = stringResource(R.string.one_time), style = MaterialTheme.typography.labelLarge)
                         }
-                        daysOfWeek.forEach { (day, index) ->
-                            val enabled = alarm.days.contains(index)
-                            Text(
-                                text = day,
-                                color = if (enabled) {
-                                    MaterialTheme.colorScheme.onSurface
-                                } else {
-                                    MaterialTheme.colorScheme.onSurface.copy(
-                                        alpha = 0.5f
-                                    )
-                                },
-                                fontWeight = if (enabled) FontWeight.Bold else FontWeight.Normal
-                            )
+
+                        alarm.isRepeatEveryday -> {
+                            Text(text = stringResource(R.string.repeating), style = MaterialTheme.typography.labelLarge)
+                        }
+
+                        alarm.isWeekends -> {
+                            Text(text = stringResource(R.string.weekends), style = MaterialTheme.typography.labelLarge)
+                        }
+
+                        alarm.isWeekdays -> {
+                            Text(text = stringResource(R.string.weekdays), style = MaterialTheme.typography.labelLarge)
+                        }
+
+                        else -> {
+                            val daysOfWeek = remember {
+                                AlarmHelper.getDaysOfWeekByLocale(context)
+                            }
+                            daysOfWeek.forEach { (day, index) ->
+                                val enabled = alarm.days.contains(index)
+                                Text(
+                                    text = day,
+                                    color = if (enabled) {
+                                        MaterialTheme.colorScheme.onSurface
+                                    } else {
+                                        MaterialTheme.colorScheme.onSurface.copy(
+                                            alpha = 0.5f
+                                        )
+                                    },
+                                    fontWeight = if (enabled) FontWeight.Bold else FontWeight.Normal,
+                                    style = MaterialTheme.typography.labelLarge
+                                )
+                            }
                         }
                     }
                 }
             }
-
-            Switch(
-                checked = isAlarmEnabled,
-                onCheckedChange = onEnable
-            )
         }
     }
 }
