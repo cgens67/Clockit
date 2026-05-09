@@ -1,5 +1,6 @@
 package com.clockit.cgens67.presentation.components
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,9 +36,13 @@ fun SwitchWithDivider(
     onClick: (() -> Unit) = {},
     onChecked: (Boolean) -> Unit = {}
 ) {
+    val view = LocalView.current
     Surface(
         modifier = Modifier.clickable(
-            onClick = onClick
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                onClick()
+            }
         )
     ) {
         Row(
@@ -77,7 +83,10 @@ fun SwitchWithDivider(
             )
             Switch(
                 checked = isChecked,
-                onCheckedChange = onChecked,
+                onCheckedChange = {
+                    view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                    onChecked(it)
+                },
                 modifier = Modifier
                     .padding(horizontal = 6.dp)
                     .semantics {
@@ -96,10 +105,14 @@ fun SwitchItem(
     isChecked: Boolean = true,
     onClick: (Boolean) -> Unit
 ) {
+    val view = LocalView.current
     Surface(
         modifier = Modifier.toggleable(
             value = isChecked,
-            onValueChange = onClick
+            onValueChange = {
+                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                onClick(it)
+            }
         )
     ) {
         Row(
