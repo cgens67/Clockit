@@ -49,7 +49,7 @@ fun WorldClockCard(
             ) {
                 while (isActive) {
                     value = clockModel.getDateWithOffset(timeZone.zoneId)
-                    delay(1000)
+                    delay(10)
                 }
             }
             Row(
