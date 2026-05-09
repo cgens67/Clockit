@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.SnapshotMutationPolicy
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -35,7 +36,8 @@ class TimerModel : ViewModel() {
         }
     )
 
-    var timePickerSeconds = 0
+    var timePickerSeconds by mutableIntStateOf(0)
+    
     var hours
         get() = timePickerSeconds / 3600
         set(value) {
