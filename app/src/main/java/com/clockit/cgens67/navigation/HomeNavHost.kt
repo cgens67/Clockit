@@ -1,5 +1,11 @@
 package com.clockit.cgens67.navigation
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,7 +29,15 @@ fun HomeNavHost(
     timerModel: TimerModel,
     stopwatchModel: StopwatchModel
 ) {
-    NavHost(navController, startDestination = startDestination.route) {
+    val animDuration = 600
+    val animEasing = FastOutSlowInEasing
+
+    NavHost(
+        navController = navController, 
+        startDestination = startDestination.route,
+        enterTransition = { fadeIn(animationSpec = tween(animDuration, easing = animEasing)) + scaleIn(initialScale = 0.95f, animationSpec = tween(animDuration, easing = animEasing)) },
+        exitTransition = { fadeOut(animationSpec = tween(animDuration, easing = animEasing)) + scaleOut(targetScale = 0.95f, animationSpec = tween(animDuration, easing = animEasing)) }
+    ) {
         composable(HomeRoutes.Alarm.route) {
             AlarmScreen(onClickSettings = {
                 onNavigate(NavRoutes.Settings.route)
