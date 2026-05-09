@@ -1,6 +1,5 @@
 package com.clockit.cgens67.presentation.components
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -26,6 +25,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.clockit.cgens67.util.extensions.performHaptic
 
 @Composable
 fun SwitchWithDivider(
@@ -40,7 +40,7 @@ fun SwitchWithDivider(
     Surface(
         modifier = Modifier.clickable(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                view.performHaptic()
                 onClick()
             }
         )
@@ -84,7 +84,7 @@ fun SwitchWithDivider(
             Switch(
                 checked = isChecked,
                 onCheckedChange = {
-                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                    view.performHaptic()
                     onChecked(it)
                 },
                 modifier = Modifier
@@ -110,7 +110,7 @@ fun SwitchItem(
         modifier = Modifier.toggleable(
             value = isChecked,
             onValueChange = {
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                view.performHaptic()
                 onClick(it)
             }
         )
