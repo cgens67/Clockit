@@ -61,6 +61,7 @@ import com.clockit.cgens67.presentation.screens.timer.components.TimerItem
 import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 import com.clockit.cgens67.util.Preferences
 import com.clockit.cgens67.util.extensions.KeepScreenOn
+import com.clockit.cgens67.util.extensions.fadingEdge
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,7 +120,7 @@ fun TimerScreen(onClickSettings: () -> Unit, timerModel: TimerModel) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .com.clockit.cgens67.util.extensions.fadingEdge(
+                    .fadingEdge(
                         isVisibleTop = listState.canScrollBackward,
                         isVisibleBottom = listState.canScrollForward,
                         length = 100f
