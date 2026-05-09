@@ -1,6 +1,5 @@
 package com.clockit.cgens67.presentation.screens.settings
 
-import android.view.HapticFeedbackConstants
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -23,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import com.clockit.cgens67.presentation.components.ClickableIcon
 import com.clockit.cgens67.util.extensions.fadingEdge
+import com.clockit.cgens67.util.extensions.performHaptic
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,13 +74,13 @@ fun LanguagePickerScreen(onBack: () -> Unit) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(20.dp))
+                        .clip(MaterialTheme.shapes.large)
                         .background(
                             if (isSelected) MaterialTheme.colorScheme.primaryContainer 
                             else MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
                         )
                         .clickable {
-                            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                            view.performHaptic()
                             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(tag))
                         }
                 ) {
