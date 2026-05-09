@@ -55,6 +55,11 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
                 .padding(pv)
+                .com.clockit.cgens67.util.extensions.fadingEdge(
+                    isVisibleTop = scrollState.canScrollBackward,
+                    isVisibleBottom = scrollState.canScrollForward,
+                    length = 100f
+                )
                 .verticalScroll(scrollState)
         ) {
             val uriHandler = LocalUriHandler.current
