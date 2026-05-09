@@ -40,7 +40,7 @@ fun SwitchPref(
                 interactionSource = interactionSource,
                 indication = null
             ) {
-                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 checked = !checked
                 Preferences.edit { putBoolean(prefKey, checked) }
             },
@@ -55,7 +55,7 @@ fun SwitchPref(
         Switch(
             checked = checked,
             onCheckedChange = {
-                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 checked = it
                 Preferences.edit { putBoolean(prefKey, it) }
                 onCheckedChange.invoke(it)
