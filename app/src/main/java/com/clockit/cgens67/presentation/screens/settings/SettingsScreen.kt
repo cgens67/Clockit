@@ -20,7 +20,6 @@ import com.clockit.cgens67.BuildConfig
 import com.clockit.cgens67.R
 import com.clockit.cgens67.navigation.homeRoutes
 import com.clockit.cgens67.presentation.components.ClickableIcon
-import com.clockit.cgens67.presentation.components.SwitchPref
 import com.clockit.cgens67.presentation.screens.settings.components.*
 import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
 import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
