@@ -1,5 +1,6 @@
 package com.clockit.cgens67.presentation.screens.timer.components
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.PageSize
@@ -12,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -28,8 +30,10 @@ fun ScrollTimePicker(
     val state = rememberPagerState(initialPage = maxValue * 100 + value - 1 - offset) {
         maxValue * 200
     }
+    val view = LocalView.current
     val currentPage = state.currentPage + 1
     LaunchedEffect(currentPage) {
+        view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
         onValueChanged((currentPage + offset) % maxValue)
     }
     VerticalPager(
