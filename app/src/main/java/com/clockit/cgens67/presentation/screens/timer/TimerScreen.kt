@@ -2,6 +2,7 @@ package com.clockit.cgens67.presentation.screens.timer
 
 import android.content.Context
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -79,16 +80,7 @@ fun TimerScreen(onClickSettings: () -> Unit, timerModel: TimerModel) {
     TopBarScaffold(
         title = stringResource(R.string.timer),
         onClickSettings = onClickSettings,
-        actions = {
-            if (scheduledObjects.isEmpty() && showExampleTimers) {
-                ClickableIcon(
-                    imageVector = Icons.Rounded.AddAlarm,
-                    contentDescription = stringResource(R.string.add_preset_timer)
-                ) {
-                    timerModel.addPersistentTimer(timerModel.timePickerSeconds)
-                }
-            }
-        },
+        actions = {}, // Intentionally empty: Remove useless top bar "+" Add button 
         fab = {
             FloatingActionButton(onClick = {
                 createNew = true
@@ -164,7 +156,9 @@ private fun TimerPicker(
     onCreateNew: () -> Unit,
     showFAB: Boolean
 ) {
+    val isTimerZero = if (useScrollPicker) timerModel.timePickerFakeUnits == 0 else timerModel.timePickerSeconds == 0
     val orientation = LocalConfiguration.current.orientation
+    
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
         Column(
             modifier = Modifier
@@ -177,7 +171,9 @@ private fun TimerPicker(
             if (showExampleTimers) {
                 PresetTimers(timerModel, onCreateNew, context)
             }
-            StartTimerButton(showFAB, onCreateNew, timerModel, context)
+            AnimatedVisibility(visible = !isTimerZero) {
+                StartTimerButton(showFAB, onCreateNew, timerModel, context)
+            }
         }
     } else {
         Row(
@@ -202,7 +198,9 @@ private fun TimerPicker(
                 if (showExampleTimers) {
                     PresetTimers(timerModel, onCreateNew, context)
                 }
-                StartTimerButton(showFAB = false, onCreateNew, timerModel, context)
+                AnimatedVisibility(visible = !isTimerZero) {
+                    StartTimerButton(showFAB = false, onCreateNew, timerModel, context)
+                }
             }
         }
     }
@@ -234,7 +232,6 @@ private fun ColumnScope.StartTimerButton(
             style = MaterialTheme.typography.titleLarge
         )
     }
-    //this looks pretty cool actually
 }
 
 @Composable
