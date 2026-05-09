@@ -72,13 +72,13 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
 
     ElevatedCard(
         modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-        shape = RoundedCornerShape(20.dp)
+        shape = MaterialTheme.shapes.extraLarge
     ) {
         Column {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val colorTextLowerAlpha = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
@@ -89,15 +89,16 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
                     obj.label.value?.let { label ->
                         Text(
                             text = label,
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = MaterialTheme.typography.titleMedium,
                             color = colorTextLowerAlpha,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
+                        Spacer(modifier = Modifier.height(4.dp))
                     }
                     Text(
                         text = "$hours:${minutes.addZero()}:${seconds.addZero()}",
-                        style = MaterialTheme.typography.displaySmall,
+                        style = MaterialTheme.typography.displayMedium,
                         maxLines = 1,
                         softWrap = false,
                         overflow = TextOverflow.Visible
@@ -128,7 +129,8 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
                                 color = colorTextLowerAlpha,
                                 style = MaterialTheme.typography.bodyMedium
                             )
-                        } }
+                        } 
+                    }
                 }
 
                 Row(
@@ -140,7 +142,6 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
                         showLabelEditor = true
                     }
                     ClickableIcon(imageVector = Icons.Default.Refresh) {
-                          //restarts the timer! O: O: O: OOOOO:
                         val intent = Intent(TimerService.UPDATE_STATE_ACTION).apply {
                             putExtra(TimerService.ACTION_EXTRA_KEY, TimerService.TIMER_RESTART)
                             putExtra(TimerService.ID_EXTRA_KEY, obj.id)
@@ -155,7 +156,7 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
                 FilledIconButton(
                     modifier = Modifier
                         .padding(start = 4.dp)
-                        .size(48.dp),
+                        .size(56.dp),
                     onClick = {
                         timerModel.pauseResumeTimer(context, obj.id)
                     }
@@ -166,7 +167,8 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
                         } else {
                             Icons.Default.PlayArrow
                         },
-                        contentDescription = null
+                        contentDescription = null,
+                        modifier = Modifier.size(28.dp)
                     )
                 }
             }
@@ -215,11 +217,6 @@ fun TimerItem(obj: TimerObject, timerModel: TimerModel) {
             }
         )
     }
-
-
-
-
-
 
     if (showRingtoneEditor) {
         RingtonePickerDialog(
