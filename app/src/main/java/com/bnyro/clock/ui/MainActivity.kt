@@ -1,4 +1,4 @@
-package com.bnyro.clock.ui
+package com.clockit.cgens67.ui
 
 import android.content.ComponentName
 import android.content.Context
@@ -17,22 +17,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.navigation.HomeRoutes
-import com.bnyro.clock.navigation.MainNavContainer
-import com.bnyro.clock.navigation.NavRoutes
-import com.bnyro.clock.navigation.homeRoutes
-import com.bnyro.clock.presentation.features.AlarmReceiverDialog
-import com.bnyro.clock.presentation.features.TimerReceiverDialog
-import com.bnyro.clock.presentation.screens.permission.PermissionModel
-import com.bnyro.clock.presentation.screens.settings.model.SettingsModel
-import com.bnyro.clock.presentation.screens.stopwatch.model.StopwatchModel
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
-import com.bnyro.clock.ui.theme.ClockYouTheme
-import com.bnyro.clock.util.Preferences
-import com.bnyro.clock.util.ThemeUtil
-import com.bnyro.clock.util.services.StopwatchService
-import com.bnyro.clock.util.services.TimerService
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.navigation.HomeRoutes
+import com.clockit.cgens67.navigation.MainNavContainer
+import com.clockit.cgens67.navigation.NavRoutes
+import com.clockit.cgens67.navigation.homeRoutes
+import com.clockit.cgens67.presentation.features.AlarmReceiverDialog
+import com.clockit.cgens67.presentation.features.TimerReceiverDialog
+import com.clockit.cgens67.presentation.screens.permission.PermissionModel
+import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
+import com.clockit.cgens67.presentation.screens.stopwatch.model.StopwatchModel
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.ui.theme.ClockYouTheme
+import com.clockit.cgens67.util.Preferences
+import com.clockit.cgens67.util.ThemeUtil
+import com.clockit.cgens67.util.services.StopwatchService
+import com.clockit.cgens67.util.services.TimerService
 
 class MainActivity : ComponentActivity() {
 
@@ -92,15 +92,17 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Ensure preferences are loaded
+        Preferences.init(applicationContext)
 
-        val allPermissions = PermissionModel.allPermissions
-        val requiredPermissions = allPermissions.any {
-            !it.hasPermission(this)
-        }
-        val startDestination = if (requiredPermissions) {
-            NavRoutes.Permissions.route
-        } else {
-            NavRoutes.Home.route
+        val hasSeenWelcome = Preferences.instance.getBoolean("hasSeenWelcome", false)
+        val requiredPermissions = PermissionModel.allPermissions.any { !it.hasPermission(this) }
+        
+        val startDestination = when {
+            !hasSeenWelcome -> NavRoutes.Welcome.route
+            requiredPermissions -> NavRoutes.Permissions.route
+            else -> NavRoutes.Home.route
         }
 
         initialTab = when (intent?.action) {
@@ -108,12 +110,10 @@ class MainActivity : ComponentActivity() {
             AlarmClock.ACTION_SET_ALARM, AlarmClock.ACTION_SHOW_ALARMS -> HomeRoutes.Alarm
             AlarmClock.ACTION_SET_TIMER, AlarmClock.ACTION_SHOW_TIMERS -> HomeRoutes.Timer
             else -> homeRoutes.first {
-                Preferences.instance.getString(
-                    Preferences.startTabKey,
-                    HomeRoutes.Alarm.route
-                ) == it.route
+                Preferences.instance.getString(Preferences.startTabKey, HomeRoutes.Alarm.route) == it.route
             }
         }
+        
         enableEdgeToEdge()
         setContent {
             val settingsModel: SettingsModel = viewModel()
@@ -125,23 +125,14 @@ class MainActivity : ComponentActivity() {
             }
             ClockYouTheme(
                 darkTheme = darkTheme,
-                customColorScheme = ThemeUtil.getSchemeFromSeed(
-                    settingsModel.customColor,
-                    darkTheme
-                ),
+                customColorScheme = ThemeUtil.getSchemeFromSeed(settingsModel.customColor, darkTheme),
                 dynamicColor = settingsModel.colorTheme == SettingsModel.ColorTheme.SYSTEM,
                 amoledDark = settingsModel.themeMode == SettingsModel.Theme.AMOLED
             ) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    getInitialAlarm()?.let {
-                        AlarmReceiverDialog(this, it)
-                    }
-                    getInitialTimer()?.let {
-                        TimerReceiverDialog(it)
-                    }
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    getInitialAlarm()?.let { AlarmReceiverDialog(this, it) }
+                    getInitialTimer()?.let { TimerReceiverDialog(it) }
+                    
                     MainNavContainer(settingsModel, initialTab, startDestination)
                 }
             }
@@ -163,7 +154,6 @@ class MainActivity : ComponentActivity() {
         unbindService(serviceConnection)
         unbindService(timerServiceConnection)
     }
-
 
     private fun getInitialAlarm(): Alarm? {
         if (intent?.action != AlarmClock.ACTION_SET_ALARM) return null
@@ -193,6 +183,6 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
-        const val SHOW_STOPWATCH_ACTION = "com.bnyro.clock.SHOW_STOPWATCH_ACTION"
+        const val SHOW_STOPWATCH_ACTION = "com.clockit.cgens67.SHOW_STOPWATCH_ACTION"
     }
 }
