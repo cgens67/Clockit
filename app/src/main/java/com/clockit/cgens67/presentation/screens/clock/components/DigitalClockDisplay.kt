@@ -27,7 +27,7 @@ fun DigitalClockDisplay() {
             producer = {
                 while (isActive) {
                     value = TimeHelper.formatDateTime(TimeHelper.getTimeByZone())
-                    delay(1000)
+                    delay(10)
                 }
             })
         Text(
