@@ -7,7 +7,7 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.AlarmClock
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -34,7 +34,7 @@ import com.clockit.cgens67.util.ThemeUtil
 import com.clockit.cgens67.util.services.StopwatchService
 import com.clockit.cgens67.util.services.TimerService
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     val stopwatchModel by viewModels<StopwatchModel>()
     val timerModel by viewModels<TimerModel>()
@@ -91,6 +91,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(androidx.appcompat.R.style.Theme_AppCompat_DayNight_NoActionBar)
         super.onCreate(savedInstanceState)
         
         // Ensure preferences are loaded
