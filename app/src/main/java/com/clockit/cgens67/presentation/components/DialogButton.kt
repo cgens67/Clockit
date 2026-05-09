@@ -15,7 +15,7 @@ fun DialogButton(
 ) {
     val view = LocalView.current
     TextButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
         onClick()
     }) {
         Text(text = stringResource(id = label))
