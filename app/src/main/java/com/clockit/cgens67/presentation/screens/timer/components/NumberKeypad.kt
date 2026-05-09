@@ -71,7 +71,7 @@ fun NumberKeypad(
             SingleElementButton(
                 onClick = {
                     coroutineScope.launch {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     }
 
                     onOperation(NumberKeypadOperation.Delete)
@@ -108,7 +108,7 @@ fun NumPadButton(
     SingleElementButton(
         onClick = {
             coroutineScope.launch {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             }
 
             onOperation(NumberKeypadOperation.AddNumber(number))
