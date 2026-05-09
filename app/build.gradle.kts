@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.3.10"
@@ -11,22 +10,20 @@ ksp {
 }
 
 android {
-    namespace = "com.bnyro.clock"
+    namespace = "com.clockit.cgens67"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.bnyro.clock"
-        minSdk = 21
+        applicationId = "com.clockit.cgens67"
+        minSdk = 24 // Increased to 24 for better locale/modern features
         targetSdk = 34
-        versionCode = 21
-        versionName = "10.1"
+        versionCode = 1
+        versionName = "0.0.1-alpha"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
-
-
     }
 
     buildTypes {
@@ -36,7 +33,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
         }
         debug {
             isDebuggable = true
@@ -58,26 +54,26 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    
+    // Required for AppCompatDelegate Locale changes
+    androidResources {
+        generateLocaleConfig = true
+    }
 }
 
 dependencies {
-
-    // Core And UI
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
-    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.navigation.compose)
 
-    // Compose BOM
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
 
-    // Material Theme
     implementation(libs.material3)
     implementation(libs.material)
     implementation(libs.material.icons.extended)
@@ -94,10 +90,8 @@ dependencies {
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
-    // Room DB
     ksp(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-
     implementation(libs.kotlinx.serialization.json)
 }
