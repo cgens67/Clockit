@@ -1,4 +1,4 @@
-package com.bnyro.clock.navigation
+package com.clockit.cgens67.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
@@ -9,7 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import com.bnyro.clock.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.components.ClickableIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

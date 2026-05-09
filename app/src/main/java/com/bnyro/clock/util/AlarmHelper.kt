@@ -1,4 +1,4 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
@@ -8,12 +8,12 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.domain.model.Permission
-import com.bnyro.clock.ui.MainActivity
-import com.bnyro.clock.util.receivers.AlarmReceiver
-import com.bnyro.clock.util.receivers.PreAlarmReceiver
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.domain.model.Permission
+import com.clockit.cgens67.ui.MainActivity
+import com.clockit.cgens67.util.receivers.AlarmReceiver
+import com.clockit.cgens67.util.receivers.PreAlarmReceiver
 import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar

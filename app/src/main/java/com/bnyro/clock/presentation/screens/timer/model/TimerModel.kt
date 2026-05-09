@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.model
+package com.clockit.cgens67.presentation.screens.timer.model
 
 import android.content.Context
 import android.content.Intent
@@ -8,10 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.bnyro.clock.domain.model.PersistentTimer
-import com.bnyro.clock.domain.model.TimerDescriptor
-import com.bnyro.clock.domain.model.TimerObject
-import com.bnyro.clock.util.services.TimerService
+import com.clockit.cgens67.domain.model.PersistentTimer
+import com.clockit.cgens67.domain.model.TimerDescriptor
+import com.clockit.cgens67.domain.model.TimerObject
+import com.clockit.cgens67.util.services.TimerService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 

@@ -32,7 +32,7 @@
 
 <div align="center">
   
-<a href="https://f-droid.org/packages/com.bnyro.clock/">
+<a href="https://f-droid.org/packages/com.clockit.cgens67/">
 <img src="https://f-droid.org/badge/get-it-on.png"
 alt="Get it on F-Droid" align="center" height="80" /></a>
   

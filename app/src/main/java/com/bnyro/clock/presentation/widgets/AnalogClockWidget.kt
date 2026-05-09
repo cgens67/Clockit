@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.widgets
+package com.clockit.cgens67.presentation.widgets
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -6,11 +6,11 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
-import com.bnyro.clock.R
-import com.bnyro.clock.ui.MainActivity
-import com.bnyro.clock.util.widgets.applyAnalogClockWidgetOptions
-import com.bnyro.clock.util.widgets.deleteAnalogClockWidgetPref
-import com.bnyro.clock.util.widgets.loadAnalogClockWidgetSettings
+import com.clockit.cgens67.R
+import com.clockit.cgens67.ui.MainActivity
+import com.clockit.cgens67.util.widgets.applyAnalogClockWidgetOptions
+import com.clockit.cgens67.util.widgets.deleteAnalogClockWidgetPref
+import com.clockit.cgens67.util.widgets.loadAnalogClockWidgetSettings
 
 class AnalogClockWidget : AppWidgetProvider() {
 

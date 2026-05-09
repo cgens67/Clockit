@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.stopwatch
+package com.clockit.cgens67.presentation.screens.stopwatch
 
 import android.content.Context
 import android.content.res.Configuration
@@ -46,12 +46,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.WatchState
-import com.bnyro.clock.navigation.TopBarScaffold
-import com.bnyro.clock.presentation.screens.stopwatch.model.StopwatchModel
-import com.bnyro.clock.util.extensions.KeepScreenOn
-import com.bnyro.clock.util.extensions.addZero
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.WatchState
+import com.clockit.cgens67.navigation.TopBarScaffold
+import com.clockit.cgens67.presentation.screens.stopwatch.model.StopwatchModel
+import com.clockit.cgens67.util.extensions.KeepScreenOn
+import com.clockit.cgens67.util.extensions.addZero
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

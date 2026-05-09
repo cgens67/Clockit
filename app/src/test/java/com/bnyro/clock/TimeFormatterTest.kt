@@ -1,6 +1,6 @@
-package com.bnyro.clock
+package com.clockit.cgens67
 
-import com.bnyro.clock.util.TimeHelper.millisToFormatted
+import com.clockit.cgens67.util.TimeHelper.millisToFormatted
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.LocalTime

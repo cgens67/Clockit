@@ -1,4 +1,4 @@
-package com.bnyro.clock.navigation
+package com.clockit.cgens67.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.AvTimer
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.bnyro.clock.R
+import com.clockit.cgens67.R
 
 sealed class HomeRoutes(
     val route: String,

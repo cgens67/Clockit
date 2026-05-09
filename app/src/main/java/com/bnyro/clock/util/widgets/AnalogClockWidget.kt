@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.widgets
+package com.clockit.cgens67.util.widgets
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -6,8 +6,8 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.content.edit
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.AnalogClockWidgetOptions
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.AnalogClockWidgetOptions
 
 fun Context.saveAnalogClockWidgetSettings(
     appWidgetId: Int, options: AnalogClockWidgetOptions

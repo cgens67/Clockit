@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarm
+package com.clockit.cgens67.presentation.screens.alarm
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -20,10 +20,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
-import com.bnyro.clock.App
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.services.AlarmService
+import com.clockit.cgens67.App
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.services.AlarmService
 import kotlinx.coroutines.runBlocking
 
 
@@ -174,7 +174,7 @@ class AlarmActivity : ComponentActivity() {
     }
 
     companion object {
-        const val ALARM_ALERT_CLOSE_ACTION = "com.bnyro.clock.ALARM_ALERT_CLOSE_ACTION"
+        const val ALARM_ALERT_CLOSE_ACTION = "com.clockit.cgens67.ALARM_ALERT_CLOSE_ACTION"
         const val ACTION_EXTRA_KEY = "action"
         const val CLOSE_ACTION = "CLOSE"
 

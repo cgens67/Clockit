@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.stopwatch.model
+package com.clockit.cgens67.presentation.screens.stopwatch.model
 
 import android.content.Context
 import android.content.Intent
@@ -9,10 +9,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
-import com.bnyro.clock.domain.model.TimeObject
-import com.bnyro.clock.domain.model.WatchState
-import com.bnyro.clock.util.TimeHelper
-import com.bnyro.clock.util.services.StopwatchService
+import com.clockit.cgens67.domain.model.TimeObject
+import com.clockit.cgens67.domain.model.WatchState
+import com.clockit.cgens67.util.TimeHelper
+import com.clockit.cgens67.util.services.StopwatchService
 
 class StopwatchModel : ViewModel() {
     /**

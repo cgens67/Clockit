@@ -1,11 +1,11 @@
-package com.bnyro.clock.domain.usecase
+package com.clockit.cgens67.domain.usecase
 
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.domain.repository.AlarmRepository
-import com.bnyro.clock.util.AlarmHelper
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.domain.repository.AlarmRepository
+import com.clockit.cgens67.util.AlarmHelper
 
 class CreateUpdateDeleteAlarmUseCase(
     private val context: Context,

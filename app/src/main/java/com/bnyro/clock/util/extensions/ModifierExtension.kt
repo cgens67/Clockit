@@ -1,5 +1,5 @@
 // Taken from https://github.com/sadellie/unitto/blob/d6f8d2e9127ebaf30c77bdf8d4bbe69348b93481/core/ui/src/main/java/com/sadellie/unitto/core/ui/common/ModifierExtensions.kt#L37
-package com.bnyro.clock.util.extensions
+package com.clockit.cgens67.util.extensions
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState

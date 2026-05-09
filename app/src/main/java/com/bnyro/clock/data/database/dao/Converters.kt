@@ -1,4 +1,4 @@
-package com.bnyro.clock.data.database.dao
+package com.clockit.cgens67.data.database.dao
 
 import androidx.room.TypeConverter
 

@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.services
+package com.clockit.cgens67.util.services
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -18,10 +18,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.WatchState
-import com.bnyro.clock.ui.MainActivity
-import com.bnyro.clock.util.NotificationHelper
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.WatchState
+import com.clockit.cgens67.ui.MainActivity
+import com.clockit.cgens67.util.NotificationHelper
 import java.util.Timer
 import java.util.TimerTask
 
@@ -205,7 +205,7 @@ class StopwatchService : Service() {
     companion object {
         private const val UPDATE_DELAY = 10
 
-        const val STOPWATCH_INTENT_ACTION = "com.bnyro.clock.STOPWATCH_ACTION"
+        const val STOPWATCH_INTENT_ACTION = "com.clockit.cgens67.STOPWATCH_ACTION"
         const val ACTION_EXTRA_KEY = "action"
         const val ACTION_PAUSE_RESUME = "pause_resume"
         const val ACTION_STOP = "stop"

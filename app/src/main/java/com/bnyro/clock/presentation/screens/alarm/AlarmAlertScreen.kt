@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarm
+package com.clockit.cgens67.presentation.screens.alarm
 
 import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
@@ -50,11 +50,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.R
-import com.bnyro.clock.presentation.screens.settings.model.SettingsModel
-import com.bnyro.clock.ui.theme.ClockYouTheme
-import com.bnyro.clock.util.ThemeUtil
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.R
+import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
+import com.clockit.cgens67.ui.theme.ClockYouTheme
+import com.clockit.cgens67.util.ThemeUtil
+import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 

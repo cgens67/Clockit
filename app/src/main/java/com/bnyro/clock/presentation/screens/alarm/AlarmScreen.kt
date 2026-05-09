@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarm
+package com.clockit.cgens67.presentation.screens.alarm
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -24,14 +24,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.AlarmSortOrder
-import com.bnyro.clock.navigation.TopBarScaffold
-import com.bnyro.clock.presentation.components.BlobIconBox
-import com.bnyro.clock.presentation.components.ClickableIcon
-import com.bnyro.clock.presentation.screens.alarm.components.AlarmFilterSection
-import com.bnyro.clock.presentation.screens.alarm.components.AlarmItem
-import com.bnyro.clock.presentation.screens.alarm.model.AlarmModel
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.AlarmSortOrder
+import com.clockit.cgens67.navigation.TopBarScaffold
+import com.clockit.cgens67.presentation.components.BlobIconBox
+import com.clockit.cgens67.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.screens.alarm.components.AlarmFilterSection
+import com.clockit.cgens67.presentation.screens.alarm.components.AlarmItem
+import com.clockit.cgens67.presentation.screens.alarm.model.AlarmModel
 
 @Composable
 fun AlarmScreen(

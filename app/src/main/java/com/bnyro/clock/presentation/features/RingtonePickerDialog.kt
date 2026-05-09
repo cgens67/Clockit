@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.features
+package com.clockit.cgens67.presentation.features
 
 import android.R
 import android.net.Uri
@@ -30,11 +30,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.presentation.components.ClickableIcon
-import com.bnyro.clock.presentation.components.DialogButton
-import com.bnyro.clock.presentation.screens.timer.model.RingingToneModel
-import com.bnyro.clock.util.PickPersistentFileContract
-import com.bnyro.clock.util.extensions.getContentFileName
+import com.clockit.cgens67.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.components.DialogButton
+import com.clockit.cgens67.presentation.screens.timer.model.RingingToneModel
+import com.clockit.cgens67.util.PickPersistentFileContract
+import com.clockit.cgens67.util.extensions.getContentFileName
 
 @Composable
 fun RingtonePickerDialog(
@@ -68,13 +68,13 @@ fun RingtonePickerDialog(
             }
         },
         dismissButton = {
-            DialogButton(com.bnyro.clock.R.string.custom_file) {
+            DialogButton(com.clockit.cgens67.R.string.custom_file) {
                 ringingToneModel.stopRinging()
                 pickSoundFile.launch(arrayOf("audio/*"))
             }
         },
         title = {
-            Text(stringResource(com.bnyro.clock.R.string.sound))
+            Text(stringResource(com.clockit.cgens67.R.string.sound))
         },
         text = {
             Column(

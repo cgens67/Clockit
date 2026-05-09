@@ -1,8 +1,8 @@
-package com.bnyro.clock
+package com.clockit.cgens67
 
-import com.bnyro.clock.data.database.AppDatabase
-import com.bnyro.clock.domain.repository.AlarmRepository
-import com.bnyro.clock.domain.repository.TimezoneRepository
+import com.clockit.cgens67.data.database.AppDatabase
+import com.clockit.cgens67.domain.repository.AlarmRepository
+import com.clockit.cgens67.domain.repository.TimezoneRepository
 
 class AppContainer(database: AppDatabase) {
     val alarmRepository: AlarmRepository by lazy {

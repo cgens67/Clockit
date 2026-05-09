@@ -1,14 +1,14 @@
-package com.bnyro.clock.util.receivers
+package com.clockit.cgens67.util.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.bnyro.clock.App
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.TimeHelper
-import com.bnyro.clock.util.services.AlarmService
+import com.clockit.cgens67.App
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.TimeHelper
+import com.clockit.cgens67.util.services.AlarmService
 import kotlinx.coroutines.runBlocking
 
 class AlarmReceiver : BroadcastReceiver() {

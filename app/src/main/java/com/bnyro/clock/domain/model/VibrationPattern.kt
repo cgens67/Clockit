@@ -1,4 +1,4 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
 data class VibrationPattern(
     val name: String,

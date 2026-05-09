@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.components
+package com.clockit.cgens67.presentation.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding

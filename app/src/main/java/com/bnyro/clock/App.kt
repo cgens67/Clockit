@@ -1,9 +1,9 @@
-package com.bnyro.clock
+package com.clockit.cgens67
 
 import android.app.Application
-import com.bnyro.clock.data.database.AppDatabase
-import com.bnyro.clock.util.NotificationHelper
-import com.bnyro.clock.util.Preferences
+import com.clockit.cgens67.data.database.AppDatabase
+import com.clockit.cgens67.util.NotificationHelper
+import com.clockit.cgens67.util.Preferences
 
 class App : Application() {
     lateinit var container: AppContainer

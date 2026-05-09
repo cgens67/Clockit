@@ -1,13 +1,13 @@
-package com.bnyro.clock.presentation.widgets
+package com.clockit.cgens67.presentation.widgets
 
 import android.content.Context
 import android.util.TypedValue
 import android.view.View
 import android.widget.RemoteViews
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.ClockWidgetOptions
-import com.bnyro.clock.util.widgets.getColorValue
-import com.bnyro.clock.util.widgets.loadClockWidgetSettings
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.ClockWidgetOptions
+import com.clockit.cgens67.util.widgets.getColorValue
+import com.clockit.cgens67.util.widgets.loadClockWidgetSettings
 
 class DigitalClockWidget : TextWidgetProvider() {
     override val widgetLayoutResource = R.layout.digital_clock

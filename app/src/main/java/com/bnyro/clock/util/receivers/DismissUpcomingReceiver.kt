@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.receivers
+package com.clockit.cgens67.util.receivers
 
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.bnyro.clock.App
-import com.bnyro.clock.util.AlarmHelper
+import com.clockit.cgens67.App
+import com.clockit.cgens67.util.AlarmHelper
 import kotlinx.coroutines.runBlocking
 //i really am going overboard with recievers but whatever they cool af
 class DismissUpcomingReceiver : BroadcastReceiver() {

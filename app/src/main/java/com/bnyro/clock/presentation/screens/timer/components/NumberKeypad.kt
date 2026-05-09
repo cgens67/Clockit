@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.components
+package com.clockit.cgens67.presentation.screens.timer.components
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Arrangement
@@ -20,8 +20,8 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.NumberKeypadOperation
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.NumberKeypadOperation
 import kotlinx.coroutines.launch
 
 @Composable

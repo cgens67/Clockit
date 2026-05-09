@@ -1,4 +1,4 @@
-package com.bnyro.clock
+package com.clockit.cgens67
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.bnyro.clock", appContext.packageName)
+        assertEquals("com.clockit.cgens67", appContext.packageName)
     }
 }

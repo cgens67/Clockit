@@ -1,4 +1,4 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
 import android.net.Uri
 import androidx.compose.runtime.MutableState

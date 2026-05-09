@@ -1,4 +1,4 @@
-package com.bnyro.clock.navigation
+package com.clockit.cgens67.navigation
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Row
@@ -24,11 +24,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.bnyro.clock.presentation.screens.alarm.model.AlarmModel
-import com.bnyro.clock.presentation.screens.clock.model.ClockModel
-import com.bnyro.clock.presentation.screens.settings.model.SettingsModel
-import com.bnyro.clock.presentation.screens.stopwatch.model.StopwatchModel
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.presentation.screens.alarm.model.AlarmModel
+import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
+import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
+import com.clockit.cgens67.presentation.screens.stopwatch.model.StopwatchModel
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 
 @Composable
 fun HomeNavContainer(

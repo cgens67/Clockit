@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.widgets
+package com.clockit.cgens67.util.widgets
 
 import android.content.Context
 import com.google.android.material.color.MaterialColors

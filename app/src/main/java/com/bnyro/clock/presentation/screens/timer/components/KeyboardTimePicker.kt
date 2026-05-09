@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.components
+package com.clockit.cgens67.presentation.screens.timer.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement

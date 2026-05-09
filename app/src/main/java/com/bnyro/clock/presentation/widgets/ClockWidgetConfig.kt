@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.widgets
+package com.clockit.cgens67.presentation.widgets
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -59,19 +59,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.ClockWidgetOptions
-import com.bnyro.clock.presentation.components.SwitchItem
-import com.bnyro.clock.presentation.components.SwitchWithDivider
-import com.bnyro.clock.presentation.screens.clock.components.TimeZonePickerDialog
-import com.bnyro.clock.presentation.screens.clock.model.ClockModel
-import com.bnyro.clock.presentation.screens.settings.model.SettingsModel
-import com.bnyro.clock.ui.theme.ClockYouTheme
-import com.bnyro.clock.util.ThemeUtil
-import com.bnyro.clock.util.widgets.TextColor
-import com.bnyro.clock.util.widgets.getColorValue
-import com.bnyro.clock.util.widgets.loadClockWidgetSettings
-import com.bnyro.clock.util.widgets.saveClockWidgetSettings
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.ClockWidgetOptions
+import com.clockit.cgens67.presentation.components.SwitchItem
+import com.clockit.cgens67.presentation.components.SwitchWithDivider
+import com.clockit.cgens67.presentation.screens.clock.components.TimeZonePickerDialog
+import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
+import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
+import com.clockit.cgens67.ui.theme.ClockYouTheme
+import com.clockit.cgens67.util.ThemeUtil
+import com.clockit.cgens67.util.widgets.TextColor
+import com.clockit.cgens67.util.widgets.getColorValue
+import com.clockit.cgens67.util.widgets.loadClockWidgetSettings
+import com.clockit.cgens67.util.widgets.saveClockWidgetSettings
 
 
 abstract class ClockWidgetConfig : ComponentActivity() {

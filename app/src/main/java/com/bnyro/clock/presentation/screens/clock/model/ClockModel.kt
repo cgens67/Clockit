@@ -1,13 +1,13 @@
-package com.bnyro.clock.presentation.screens.clock.model
+package com.clockit.cgens67.presentation.screens.clock.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.bnyro.clock.App
-import com.bnyro.clock.domain.model.TimeZoneSortOrder
-import com.bnyro.clock.domain.model.TimeZone
-import com.bnyro.clock.util.Preferences
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.App
+import com.clockit.cgens67.domain.model.TimeZoneSortOrder
+import com.clockit.cgens67.domain.model.TimeZone
+import com.clockit.cgens67.util.Preferences
+import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine

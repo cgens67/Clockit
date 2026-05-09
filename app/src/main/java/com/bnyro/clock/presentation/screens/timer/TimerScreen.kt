@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer
+package com.clockit.cgens67.presentation.screens.timer
 
 import android.content.Context
 import android.content.res.Configuration
@@ -50,17 +50,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.NumberKeypadOperation
-import com.bnyro.clock.navigation.TopBarScaffold
-import com.bnyro.clock.presentation.components.ClickableIcon
-import com.bnyro.clock.presentation.components.TimePickerDial
-import com.bnyro.clock.presentation.screens.timer.components.FormattedTimerTime
-import com.bnyro.clock.presentation.screens.timer.components.NumberKeypad
-import com.bnyro.clock.presentation.screens.timer.components.TimerItem
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
-import com.bnyro.clock.util.Preferences
-import com.bnyro.clock.util.extensions.KeepScreenOn
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.NumberKeypadOperation
+import com.clockit.cgens67.navigation.TopBarScaffold
+import com.clockit.cgens67.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.components.TimePickerDial
+import com.clockit.cgens67.presentation.screens.timer.components.FormattedTimerTime
+import com.clockit.cgens67.presentation.screens.timer.components.NumberKeypad
+import com.clockit.cgens67.presentation.screens.timer.components.TimerItem
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.util.Preferences
+import com.clockit.cgens67.util.extensions.KeepScreenOn
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

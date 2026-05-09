@@ -1,4 +1,4 @@
-package com.bnyro.clock.ui.theme
+package com.clockit.cgens67.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

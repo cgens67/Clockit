@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.receivers
+package com.clockit.cgens67.util.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context

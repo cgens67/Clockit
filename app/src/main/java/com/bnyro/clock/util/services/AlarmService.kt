@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.services
+package com.clockit.cgens67.util.services
 
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -25,13 +25,13 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import com.bnyro.clock.App
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.presentation.screens.alarm.AlarmActivity
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.NotificationHelper
-import com.bnyro.clock.util.receivers.PreAlarmReceiver
+import com.clockit.cgens67.App
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.presentation.screens.alarm.AlarmActivity
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.NotificationHelper
+import com.clockit.cgens67.util.receivers.PreAlarmReceiver
 import kotlinx.coroutines.runBlocking
 import java.util.Timer
 import java.util.TimerTask
@@ -282,7 +282,7 @@ class AlarmService : Service() {
         )
 
     companion object {
-        const val ALARM_INTENT_ACTION = "com.bnyro.clock.ALARM_ACTION"
+        const val ALARM_INTENT_ACTION = "com.clockit.cgens67.ALARM_ACTION"
         const val ACTION_EXTRA_KEY = "action"
         const val DISMISS_ACTION = "DISMISS"
         const val SNOOZE_ACTION = "SNOOZE"

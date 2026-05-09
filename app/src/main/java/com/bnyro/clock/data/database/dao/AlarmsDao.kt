@@ -1,11 +1,11 @@
-package com.bnyro.clock.data.database.dao
+package com.clockit.cgens67.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.bnyro.clock.domain.model.Alarm
+import com.clockit.cgens67.domain.model.Alarm
 import kotlinx.coroutines.flow.Flow
 
 @Dao

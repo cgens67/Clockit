@@ -1,17 +1,17 @@
-package com.bnyro.clock.navigation
+package com.clockit.cgens67.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.bnyro.clock.presentation.screens.alarm.AlarmScreen
-import com.bnyro.clock.presentation.screens.alarm.model.AlarmModel
-import com.bnyro.clock.presentation.screens.clock.ClockScreen
-import com.bnyro.clock.presentation.screens.clock.model.ClockModel
-import com.bnyro.clock.presentation.screens.stopwatch.StopwatchScreen
-import com.bnyro.clock.presentation.screens.stopwatch.model.StopwatchModel
-import com.bnyro.clock.presentation.screens.timer.TimerScreen
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.presentation.screens.alarm.AlarmScreen
+import com.clockit.cgens67.presentation.screens.alarm.model.AlarmModel
+import com.clockit.cgens67.presentation.screens.clock.ClockScreen
+import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
+import com.clockit.cgens67.presentation.screens.stopwatch.StopwatchScreen
+import com.clockit.cgens67.presentation.screens.stopwatch.model.StopwatchModel
+import com.clockit.cgens67.presentation.screens.timer.TimerScreen
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 
 @Composable
 fun HomeNavHost(

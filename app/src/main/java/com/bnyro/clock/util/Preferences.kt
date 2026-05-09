@@ -1,9 +1,9 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.bnyro.clock.navigation.homeRoutes
+import com.clockit.cgens67.navigation.homeRoutes
 
 object Preferences {
     lateinit var instance: SharedPreferences

@@ -1,10 +1,10 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.util.TimeHelper
 
 /**
  * @property time The time of the day in milliseconds.

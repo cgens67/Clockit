@@ -1,4 +1,4 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.ColorScheme

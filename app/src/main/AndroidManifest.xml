@@ -97,7 +97,7 @@
                 android:enabled="true"
                 android:exported="false">
             <intent-filter>
-                <action android:name="com.bnyro.clock.TIMER_EXPIRED" />
+                <action android:name="com.clockit.cgens67.TIMER_EXPIRED" />
             </intent-filter>
         </receiver>
 

@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarm.components
+package com.clockit.cgens67.presentation.screens.alarm.components
 
 import android.R
 import androidx.compose.foundation.layout.Row
@@ -20,11 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.presentation.components.ClickableIcon
-import com.bnyro.clock.presentation.components.DialogButton
-import com.bnyro.clock.presentation.screens.timer.components.KeyboardPickerState
-import com.bnyro.clock.presentation.screens.timer.components.KeyboardTimePicker
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.components.DialogButton
+import com.clockit.cgens67.presentation.screens.timer.components.KeyboardPickerState
+import com.clockit.cgens67.presentation.screens.timer.components.KeyboardTimePicker
+import com.clockit.cgens67.util.TimeHelper
 
 enum class TimePickerMode {
     CLOCK,

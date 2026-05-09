@@ -1,9 +1,9 @@
-package com.bnyro.clock.domain.repository
+package com.clockit.cgens67.domain.repository
 
 import android.content.Context
-import com.bnyro.clock.data.database.dao.TimeZonesDao
-import com.bnyro.clock.domain.model.CountryTimezone
-import com.bnyro.clock.domain.model.TimeZone
+import com.clockit.cgens67.data.database.dao.TimeZonesDao
+import com.clockit.cgens67.domain.model.CountryTimezone
+import com.clockit.cgens67.domain.model.TimeZone
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

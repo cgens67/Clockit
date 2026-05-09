@@ -1,4 +1,4 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.net.Uri
 import androidx.annotation.StringRes
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
-import com.bnyro.clock.R
-import com.bnyro.clock.util.receivers.DeleteNotificationChannelReceiver
+import com.clockit.cgens67.R
+import com.clockit.cgens67.util.receivers.DeleteNotificationChannelReceiver
 
 object NotificationHelper {
     const val STOPWATCH_CHANNEL = "stopwatch"

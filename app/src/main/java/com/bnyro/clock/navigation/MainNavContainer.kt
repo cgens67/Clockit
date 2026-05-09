@@ -1,10 +1,10 @@
-package com.bnyro.clock.navigation
+package com.clockit.cgens67.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.bnyro.clock.presentation.screens.settings.model.SettingsModel
+import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
 
 @Composable
 fun MainNavContainer(

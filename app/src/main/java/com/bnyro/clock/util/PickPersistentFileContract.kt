@@ -1,4 +1,4 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.app.Activity
 import android.content.Context

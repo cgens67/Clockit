@@ -1,6 +1,6 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
-import com.bnyro.clock.util.Preferences
+import com.clockit.cgens67.util.Preferences
 
 data class PersistentTimer(
     val seconds: Int

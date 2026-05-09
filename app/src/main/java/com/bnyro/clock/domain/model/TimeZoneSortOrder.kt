@@ -1,7 +1,7 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
 import androidx.annotation.StringRes
-import com.bnyro.clock.R
+import com.clockit.cgens67.R
 
 enum class TimeZoneSortOrder(@StringRes val value: Int) {
     ALPHABETIC(R.string.alphabetic),

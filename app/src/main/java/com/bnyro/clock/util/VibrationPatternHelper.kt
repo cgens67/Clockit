@@ -1,7 +1,7 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.content.Context
-import com.bnyro.clock.domain.model.VibrationPattern
+import com.clockit.cgens67.domain.model.VibrationPattern
 import kotlinx.serialization.json.Json
 
 class VibrationPatternHelper {

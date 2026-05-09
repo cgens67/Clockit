@@ -1,10 +1,10 @@
-package com.bnyro.clock.data.database.dao
+package com.clockit.cgens67.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.bnyro.clock.domain.model.TimeZone
+import com.clockit.cgens67.domain.model.TimeZone
 import kotlinx.coroutines.flow.Flow
 
 @Dao

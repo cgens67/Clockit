@@ -1,9 +1,9 @@
-package com.bnyro.clock.util
+package com.clockit.cgens67.util
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.TimeObject
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.TimeObject
 import java.time.Instant
 import java.time.LocalTime
 import java.time.ZoneId
@@ -109,7 +109,7 @@ object TimeHelper {
 
     fun formatHourDifference(
         context: Context,
-        timeZone: com.bnyro.clock.domain.model.TimeZone
+        timeZone: com.clockit.cgens67.domain.model.TimeZone
     ): String {
         val now = GregorianCalendar.getInstance().timeInMillis
         val currentZoneOffset = TimeZone.getDefault().getOffset(now)

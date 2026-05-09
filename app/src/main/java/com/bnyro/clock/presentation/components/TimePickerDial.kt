@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.components
+package com.clockit.cgens67.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.presentation.screens.timer.components.ScrollTimePicker
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.R
+import com.clockit.cgens67.presentation.screens.timer.components.ScrollTimePicker
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 
 @Composable
 fun TimePickerDial(timerModel: TimerModel) {

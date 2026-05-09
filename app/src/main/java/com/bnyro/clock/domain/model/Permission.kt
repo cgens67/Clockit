@@ -1,4 +1,4 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
 import android.Manifest
 import android.app.Activity
@@ -12,8 +12,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
-import com.bnyro.clock.BuildConfig
-import com.bnyro.clock.R
+import com.clockit.cgens67.BuildConfig
+import com.clockit.cgens67.R
 
 sealed class Permission(
     @StringRes

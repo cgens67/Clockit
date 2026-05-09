@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.clock
+package com.clockit.cgens67.presentation.screens.clock
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -21,15 +21,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.TimeZoneSortOrder
-import com.bnyro.clock.navigation.TopBarScaffold
-import com.bnyro.clock.presentation.components.ClickableIcon
-import com.bnyro.clock.presentation.screens.clock.components.DigitalClockDisplay
-import com.bnyro.clock.presentation.screens.clock.components.TimeZoneSelectDialog
-import com.bnyro.clock.presentation.screens.clock.components.WorldClockItem
-import com.bnyro.clock.presentation.screens.clock.model.ClockModel
-import com.bnyro.clock.util.Preferences
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.TimeZoneSortOrder
+import com.clockit.cgens67.navigation.TopBarScaffold
+import com.clockit.cgens67.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.screens.clock.components.DigitalClockDisplay
+import com.clockit.cgens67.presentation.screens.clock.components.TimeZoneSelectDialog
+import com.clockit.cgens67.presentation.screens.clock.components.WorldClockItem
+import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
+import com.clockit.cgens67.util.Preferences
 
 @Composable
 fun ClockScreen(

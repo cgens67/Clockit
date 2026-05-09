@@ -1,4 +1,4 @@
-package com.bnyro.clock.data.database
+package com.clockit.cgens67.data.database
 
 import android.content.Context
 import androidx.room.AutoMigration
@@ -10,11 +10,11 @@ import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.bnyro.clock.data.database.dao.AlarmsDao
-import com.bnyro.clock.data.database.dao.Converters
-import com.bnyro.clock.data.database.dao.TimeZonesDao
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.domain.model.TimeZone
+import com.clockit.cgens67.data.database.dao.AlarmsDao
+import com.clockit.cgens67.data.database.dao.Converters
+import com.clockit.cgens67.data.database.dao.TimeZonesDao
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.domain.model.TimeZone
 
 @Database(
     entities = [TimeZone::class, Alarm::class],
@@ -47,7 +47,7 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        private const val dbName = "com.bnyro.clock"
+        private const val dbName = "com.clockit.cgens67"
 
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {

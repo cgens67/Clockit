@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.widgets
+package com.clockit.cgens67.presentation.widgets
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -50,15 +50,15 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.AnalogClockFace
-import com.bnyro.clock.domain.model.AnalogClockWidgetOptions
-import com.bnyro.clock.presentation.screens.settings.model.SettingsModel
-import com.bnyro.clock.ui.theme.ClockYouTheme
-import com.bnyro.clock.util.ThemeUtil
-import com.bnyro.clock.util.widgets.loadAnalogClockWidgetSettings
-import com.bnyro.clock.util.widgets.saveAnalogClockWidgetSettings
-import com.bnyro.clock.util.widgets.updateAnalogClockWidget
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.AnalogClockFace
+import com.clockit.cgens67.domain.model.AnalogClockWidgetOptions
+import com.clockit.cgens67.presentation.screens.settings.model.SettingsModel
+import com.clockit.cgens67.ui.theme.ClockYouTheme
+import com.clockit.cgens67.util.ThemeUtil
+import com.clockit.cgens67.util.widgets.loadAnalogClockWidgetSettings
+import com.clockit.cgens67.util.widgets.saveAnalogClockWidgetSettings
+import com.clockit.cgens67.util.widgets.updateAnalogClockWidget
 import android.graphics.drawable.Icon as AndroidIcon
 
 

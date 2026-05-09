@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.clock.components
+package com.clockit.cgens67.presentation.screens.clock.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,10 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.TimeZone
-import com.bnyro.clock.presentation.components.DialogButton
-import com.bnyro.clock.presentation.screens.clock.model.ClockModel
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.TimeZone
+import com.clockit.cgens67.presentation.components.DialogButton
+import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

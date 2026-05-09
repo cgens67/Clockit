@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.components
+package com.clockit.cgens67.presentation.screens.timer.components
 
 import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
@@ -43,16 +43,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.TimerObject
-import com.bnyro.clock.domain.model.WatchState
-import com.bnyro.clock.presentation.components.ClickableIcon
-import com.bnyro.clock.presentation.components.DialogButton
-import com.bnyro.clock.presentation.features.RingtonePickerDialog
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
-import com.bnyro.clock.util.TimeHelper
-import com.bnyro.clock.util.extensions.addZero
-import com.bnyro.clock.util.services.TimerService
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.TimerObject
+import com.clockit.cgens67.domain.model.WatchState
+import com.clockit.cgens67.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.components.DialogButton
+import com.clockit.cgens67.presentation.features.RingtonePickerDialog
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.util.TimeHelper
+import com.clockit.cgens67.util.extensions.addZero
+import com.clockit.cgens67.util.services.TimerService
 import java.time.ZonedDateTime
 
 

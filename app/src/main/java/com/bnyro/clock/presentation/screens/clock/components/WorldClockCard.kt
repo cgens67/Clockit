@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.clock.components
+package com.clockit.cgens67.presentation.screens.clock.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,9 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.domain.model.TimeZone
-import com.bnyro.clock.presentation.screens.clock.model.ClockModel
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.domain.model.TimeZone
+import com.clockit.cgens67.presentation.screens.clock.model.ClockModel
+import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 

@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.receivers
+package com.clockit.cgens67.util.receivers
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,8 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.bnyro.clock.R
-import com.bnyro.clock.util.AlarmHelper
+import com.clockit.cgens67.R
+import com.clockit.cgens67.util.AlarmHelper
 import kotlin.jvm.java
 
 class PreAlarmReceiver : BroadcastReceiver() {

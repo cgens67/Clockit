@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.settings.components
+package com.clockit.cgens67.presentation.screens.settings.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.util.catpucchinLatte
+import com.clockit.cgens67.util.catpucchinLatte
 
 @Composable
 fun ColorPref(selectedColor: Int, onSelect: (Int) -> Unit) {

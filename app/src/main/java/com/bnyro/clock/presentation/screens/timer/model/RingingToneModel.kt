@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.model
+package com.clockit.cgens67.presentation.screens.timer.model
 
 import android.app.Application
 import android.content.Context
@@ -6,7 +6,7 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
-import com.bnyro.clock.util.RingtoneHelper
+import com.clockit.cgens67.util.RingtoneHelper
 
 class RingingToneModel(application: Application) : AndroidViewModel(application) {
     var sounds =

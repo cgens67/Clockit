@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.widgets
+package com.clockit.cgens67.presentation.widgets
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -8,9 +8,9 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.annotation.LayoutRes
-import com.bnyro.clock.R
-import com.bnyro.clock.ui.MainActivity
-import com.bnyro.clock.util.widgets.deleteClockWidgetPref
+import com.clockit.cgens67.R
+import com.clockit.cgens67.ui.MainActivity
+import com.clockit.cgens67.util.widgets.deleteClockWidgetPref
 
 abstract class TextWidgetProvider: AppWidgetProvider() {
     @get:LayoutRes

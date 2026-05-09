@@ -1,4 +1,4 @@
-package com.bnyro.clock
+package com.clockit.cgens67
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

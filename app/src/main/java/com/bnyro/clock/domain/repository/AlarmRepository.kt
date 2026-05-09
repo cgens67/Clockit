@@ -1,7 +1,7 @@
-package com.bnyro.clock.domain.repository
+package com.clockit.cgens67.domain.repository
 
-import com.bnyro.clock.data.database.dao.AlarmsDao
-import com.bnyro.clock.domain.model.Alarm
+import com.clockit.cgens67.data.database.dao.AlarmsDao
+import com.clockit.cgens67.domain.model.Alarm
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

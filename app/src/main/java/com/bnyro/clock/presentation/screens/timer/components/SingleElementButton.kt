@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.components
+package com.clockit.cgens67.presentation.screens.timer.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.util.extensions.squashable
+import com.clockit.cgens67.util.extensions.squashable
 
 @Composable
 fun SingleElementButton(

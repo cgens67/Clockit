@@ -1,10 +1,10 @@
-package com.bnyro.clock.presentation.screens.alarmpicker
+package com.clockit.cgens67.presentation.screens.alarmpicker
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.presentation.screens.alarmpicker.components.AlarmPicker
-import com.bnyro.clock.presentation.screens.alarmpicker.model.AlarmPickerModel
+import com.clockit.cgens67.presentation.screens.alarmpicker.components.AlarmPicker
+import com.clockit.cgens67.presentation.screens.alarmpicker.model.AlarmPickerModel
 
 @Composable
 fun AlarmPickerScreen(onNavigateBack: () -> Unit) {

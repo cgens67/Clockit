@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.features
+package com.clockit.cgens67.presentation.features
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -9,9 +9,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.presentation.screens.alarmpicker.components.AlarmPicker
-import com.bnyro.clock.presentation.screens.alarmpicker.model.AlarmPickerModel
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.presentation.screens.alarmpicker.components.AlarmPicker
+import com.clockit.cgens67.presentation.screens.alarmpicker.model.AlarmPickerModel
 
 @Composable
 fun AlarmReceiverDialog(context: Context, alarm: Alarm) {

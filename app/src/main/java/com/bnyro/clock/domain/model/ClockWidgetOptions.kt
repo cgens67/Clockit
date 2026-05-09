@@ -1,6 +1,6 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
-import com.bnyro.clock.util.widgets.TextColor
+import com.clockit.cgens67.util.widgets.TextColor
 
 data class ClockWidgetOptions(
     var showDate: Boolean = true,

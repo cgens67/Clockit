@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarm.model
+package com.clockit.cgens67.presentation.screens.alarm.model
 
 import android.app.Application
 import android.content.Context
@@ -8,15 +8,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.bnyro.clock.App
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.domain.model.AlarmFilters
-import com.bnyro.clock.domain.model.AlarmSortOrder
-import com.bnyro.clock.domain.repository.AlarmRepository
-import com.bnyro.clock.domain.usecase.CreateUpdateDeleteAlarmUseCase
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.App
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.domain.model.AlarmFilters
+import com.clockit.cgens67.domain.model.AlarmSortOrder
+import com.clockit.cgens67.domain.repository.AlarmRepository
+import com.clockit.cgens67.domain.usecase.CreateUpdateDeleteAlarmUseCase
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

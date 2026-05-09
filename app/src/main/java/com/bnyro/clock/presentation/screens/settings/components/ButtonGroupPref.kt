@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.settings.components
+package com.clockit.cgens67.presentation.screens.settings.components
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column

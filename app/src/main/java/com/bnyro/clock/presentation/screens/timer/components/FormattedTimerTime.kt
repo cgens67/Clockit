@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.timer.components
+package com.clockit.cgens67.presentation.screens.timer.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.domain.model.TimeUnit
+import com.clockit.cgens67.domain.model.TimeUnit
 
 @Composable
 fun FormattedTimerTime(

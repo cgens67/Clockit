@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.clock.components
+package com.clockit.cgens67.presentation.screens.clock.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +11,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 

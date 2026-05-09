@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarmpicker.components
+package com.clockit.cgens67.presentation.screens.alarmpicker.components
 
 import android.content.ContentResolver
 import android.provider.Settings
@@ -47,16 +47,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.presentation.components.SwitchItem
-import com.bnyro.clock.presentation.components.SwitchWithDivider
-import com.bnyro.clock.presentation.features.RingtonePickerDialog
-import com.bnyro.clock.presentation.features.VibrationPatternPickerDialog
-import com.bnyro.clock.presentation.screens.alarm.components.AlarmTimePicker
-import com.bnyro.clock.presentation.screens.alarm.components.SnoozeTimePickerDialog
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.presentation.components.SwitchItem
+import com.clockit.cgens67.presentation.components.SwitchWithDivider
+import com.clockit.cgens67.presentation.features.RingtonePickerDialog
+import com.clockit.cgens67.presentation.features.VibrationPatternPickerDialog
+import com.clockit.cgens67.presentation.screens.alarm.components.AlarmTimePicker
+import com.clockit.cgens67.presentation.screens.alarm.components.SnoozeTimePickerDialog
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.TimeHelper
 
 @Composable
 fun AlarmPicker(currentAlarm: Alarm, onSave: (Alarm) -> Unit, onCancel: () -> Unit) {

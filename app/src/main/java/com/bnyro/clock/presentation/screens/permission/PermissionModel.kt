@@ -1,8 +1,8 @@
-package com.bnyro.clock.presentation.screens.permission
+package com.clockit.cgens67.presentation.screens.permission
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.bnyro.clock.domain.model.Permission
+import com.clockit.cgens67.domain.model.Permission
 
 class PermissionModel(application: Application) :
     AndroidViewModel(application) {

@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarmpicker.model
+package com.clockit.cgens67.presentation.screens.alarmpicker.model
 
 import android.app.Application
 import android.content.Context
@@ -6,13 +6,13 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.bnyro.clock.App
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.Alarm
-import com.bnyro.clock.domain.usecase.CreateUpdateDeleteAlarmUseCase
-import com.bnyro.clock.navigation.NavRoutes
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.App
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.Alarm
+import com.clockit.cgens67.domain.usecase.CreateUpdateDeleteAlarmUseCase
+import com.clockit.cgens67.navigation.NavRoutes
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.TimeHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.permission.components
+package com.clockit.cgens67.presentation.screens.permission.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
@@ -22,8 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.presentation.components.BlobIconBox
+import com.clockit.cgens67.R
+import com.clockit.cgens67.presentation.components.BlobIconBox
 
 @Composable
 fun PermissionRequestPage(

@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.components
+package com.clockit.cgens67.presentation.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
+import com.clockit.cgens67.R
 
 @Composable
 fun BlobIconBox(@DrawableRes icon: Int) {

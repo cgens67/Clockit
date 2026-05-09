@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.permission
+package com.clockit.cgens67.presentation.screens.permission
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.HorizontalPager
@@ -8,8 +8,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.presentation.screens.permission.components.PermissionRequestPage
-import com.bnyro.clock.ui.MainActivity
+import com.clockit.cgens67.presentation.screens.permission.components.PermissionRequestPage
+import com.clockit.cgens67.ui.MainActivity
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)

@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.settings.components
+package com.clockit.cgens67.presentation.screens.settings.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.presentation.components.ClickableIcon
+import com.clockit.cgens67.presentation.components.ClickableIcon
 
 @Composable
 fun IconPreference(

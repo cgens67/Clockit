@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.services
+package com.clockit.cgens67.util.services
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -27,12 +27,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.TimerDescriptor
-import com.bnyro.clock.domain.model.TimerObject
-import com.bnyro.clock.domain.model.WatchState
-import com.bnyro.clock.util.NotificationHelper
-import com.bnyro.clock.util.RingtoneHelper
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.TimerDescriptor
+import com.clockit.cgens67.domain.model.TimerObject
+import com.clockit.cgens67.domain.model.WatchState
+import com.clockit.cgens67.util.NotificationHelper
+import com.clockit.cgens67.util.RingtoneHelper
 
 import java.util.Timer
 import java.util.TimerTask
@@ -500,7 +500,7 @@ class TimerService : Service() {
 
 
     companion object {
-        const val UPDATE_STATE_ACTION = "com.bnyro.clock.UPDATE_STATE"
+        const val UPDATE_STATE_ACTION = "com.clockit.cgens67.UPDATE_STATE"
         const val ACTION_EXTRA_KEY = "action"
         const val ID_EXTRA_KEY = "id"
         const val INITIAL_TIMER_EXTRA_KEY = "timer"
@@ -509,6 +509,6 @@ class TimerService : Service() {
         private const val UPDATE_DELAY = 100
         const val TIMER_RESTART = "timer_restart"
         const val ACTION_ADD_5_MIN = "add_5_min"
-        const val ACTION_TIMER_EXPIRED = "com.bnyro.clock.TIMER_EXPIRED"
+        const val ACTION_TIMER_EXPIRED = "com.clockit.cgens67.TIMER_EXPIRED"
     }
 }

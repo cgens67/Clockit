@@ -1,8 +1,8 @@
-package com.bnyro.clock.util.widgets
+package com.clockit.cgens67.util.widgets
 
 import android.content.Context
 import androidx.core.content.edit
-import com.bnyro.clock.domain.model.ClockWidgetOptions
+import com.clockit.cgens67.domain.model.ClockWidgetOptions
 
 fun Context.saveClockWidgetSettings(
     appWidgetId: Int,

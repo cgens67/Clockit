@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.extensions
+package com.clockit.cgens67.util.extensions
 
 fun Int.addZero(): String {
     if (this >= 10) return this.toString()

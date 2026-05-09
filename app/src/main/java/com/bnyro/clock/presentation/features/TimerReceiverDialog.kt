@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.features
+package com.clockit.cgens67.presentation.features
 
 import android.text.format.DateUtils
 import androidx.compose.material3.AlertDialog
@@ -11,9 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.R
-import com.bnyro.clock.presentation.components.DialogButton
-import com.bnyro.clock.presentation.screens.timer.model.TimerModel
+import com.clockit.cgens67.R
+import com.clockit.cgens67.presentation.components.DialogButton
+import com.clockit.cgens67.presentation.screens.timer.model.TimerModel
 
 @Composable
 fun TimerReceiverDialog(duration: Int) {

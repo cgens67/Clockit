@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.features
+package com.clockit.cgens67.presentation.features
 
 import android.content.Context
 import android.os.Vibrator
@@ -39,9 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.VibrationPattern
-import com.bnyro.clock.presentation.features.model.VibrationPickerModel
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.VibrationPattern
+import com.clockit.cgens67.presentation.features.model.VibrationPickerModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

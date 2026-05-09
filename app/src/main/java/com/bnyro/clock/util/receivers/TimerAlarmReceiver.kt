@@ -1,4 +1,4 @@
-package com.bnyro.clock.util.services
+package com.clockit.cgens67.util.services
 
 import android.content.BroadcastReceiver
 import android.content.Context

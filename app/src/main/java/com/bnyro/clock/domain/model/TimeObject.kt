@@ -1,6 +1,6 @@
-package com.bnyro.clock.domain.model
+package com.clockit.cgens67.domain.model
 
-import com.bnyro.clock.util.extensions.addZero
+import com.clockit.cgens67.util.extensions.addZero
 
 data class TimeObject(
     val hours: Int = 0,

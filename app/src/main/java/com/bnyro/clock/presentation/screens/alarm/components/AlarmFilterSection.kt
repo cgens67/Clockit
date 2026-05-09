@@ -1,4 +1,4 @@
-package com.bnyro.clock.presentation.screens.alarm.components
+package com.clockit.cgens67.presentation.screens.alarm.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -36,10 +36,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bnyro.clock.R
-import com.bnyro.clock.domain.model.AlarmFilters
-import com.bnyro.clock.util.AlarmHelper
-import com.bnyro.clock.util.TimeHelper
+import com.clockit.cgens67.R
+import com.clockit.cgens67.domain.model.AlarmFilters
+import com.clockit.cgens67.util.AlarmHelper
+import com.clockit.cgens67.util.TimeHelper
 
 @Composable
 fun AlarmFilterSection(
