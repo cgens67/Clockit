@@ -15,6 +15,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 
@@ -71,3 +77,57 @@ fun Modifier.squashable(
             enabled = enabled
         )
 }
+
+fun Modifier.fadingEdge(
+    isVisibleTop: Boolean,
+    isVisibleBottom: Boolean,
+    isVisibleLeft: Boolean = false,
+    isVisibleRight: Boolean = false,
+    length: Float = 100f
+): Modifier = this
+    .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
+    .drawWithContent {
+        drawContent()
+
+        val colors = listOf(Color.Transparent, Color.Black)
+        if (isVisibleTop) {
+            drawRect(
+                brush = Brush.verticalGradient(
+                    colors = colors,
+                    startY = 0f,
+                    endY = length
+                ),
+                blendMode = BlendMode.DstIn
+            )
+        }
+        if (isVisibleBottom) {
+            drawRect(
+                brush = Brush.verticalGradient(
+                    colors = colors.reversed(),
+                    startY = size.height - length,
+                    endY = size.height
+                ),
+                blendMode = BlendMode.DstIn
+            )
+        }
+        if (isVisibleLeft) {
+            drawRect(
+                brush = Brush.horizontalGradient(
+                    colors = colors,
+                    startX = 0f,
+                    endX = length
+                ),
+                blendMode = BlendMode.DstIn
+            )
+        }
+        if (isVisibleRight) {
+            drawRect(
+                brush = Brush.horizontalGradient(
+                    colors = colors.reversed(),
+                    startX = size.width - length,
+                    endX = size.width
+                ),
+                blendMode = BlendMode.DstIn
+            )
+        }
+    }
