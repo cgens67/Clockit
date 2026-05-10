@@ -60,10 +60,9 @@ class AlarmService : Service() {
     private val alarmActionReceiver = object : BroadcastReceiver() {
         @RequiresApi(Build.VERSION_CODES.M)
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("AlarmService", "magga")
+            Log.d("AlarmService", "Alarm Action Received")
             when (intent?.getStringExtra(ACTION_EXTRA_KEY)) {
                 DISMISS_ACTION -> {
-                    //maybe fixes a super shitty bug that was shitty kinda D:
                     currentAlarm?.let { alarm ->
                         if (alarm.repeat) {
                             AlarmHelper.enqueue(this@AlarmService, alarm, skipToday = true)
@@ -73,7 +72,7 @@ class AlarmService : Service() {
                 }
 
                 SNOOZE_ACTION -> {
-                    AlarmHelper.snooze(this@AlarmService, currentAlarm!!)
+                    currentAlarm?.let { AlarmHelper.snooze(this@AlarmService, it) }
                     stopSelf()
                 }
             }
@@ -107,12 +106,24 @@ class AlarmService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val id = intent?.getLongExtra(AlarmHelper.EXTRA_ID, -1).takeIf { it != -1L }
-            ?: return START_STICKY
+        val id = intent?.getLongExtra(AlarmHelper.EXTRA_ID, -1L)?.takeIf { it != -1L }
+        
+        if (id == null) {
+            startForeground(notificationId, createFallbackNotification(this))
+            stopSelf()
+            return START_NOT_STICKY
+        }
+
         val alarmRepository = (application as App).container.alarmRepository
         val alarm = runBlocking {
             alarmRepository.getAlarmById(id)
-        } ?: return START_STICKY
+        } 
+        
+        if (alarm == null) {
+            startForeground(notificationId, createFallbackNotification(this))
+            stopSelf()
+            return START_NOT_STICKY
+        }
 
         startForeground(notificationId, createNotification(this, alarm))
         play(alarm)
@@ -131,12 +142,11 @@ class AlarmService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun play(alarm: Alarm) {
-        // stop() checks to see if we are already playing.
         stop()
         if (alarm.soundEnabled) {
-            val alert: Uri? = alarm.soundUri?.let { Uri.parse(it) } ?: RingtoneManager.getDefaultUri(
-                RingtoneManager.TYPE_ALARM
-            )
+            val alert: Uri? = alarm.soundUri?.takeIf { it.isNotBlank() }?.let { Uri.parse(it) } 
+                ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                
             if (alert != null) {
                 mediaPlayer = MediaPlayer()
                 mediaPlayer?.setOnErrorListener { mp, _, _ ->
@@ -150,12 +160,11 @@ class AlarmService : Service() {
                     mediaPlayer?.setDataSource(this, alert)
                     mediaPlayer?.let { startAlarm(it) }
                 } catch (e: Exception) {
-                    Log.e("Failed to play ringtone", e.message, e)
+                    Log.e("Failed to play ringtone", e.message.toString(), e)
                 }
             }
         }
 
-        /* Start the vibrator after everything is ok with the media player */
         if (alarm.vibrate) {
             val vibrationPattern =
                 alarm.vibrationPattern.map(Int::toLong).toLongArray()
@@ -187,9 +196,6 @@ class AlarmService : Service() {
         }
     }
 
-    /**
-     * Stops alarm
-     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun stop() {
         if (!isPlaying) return
@@ -198,7 +204,6 @@ class AlarmService : Service() {
         volumeHandler.removeCallbacks(volumeRunnable)
         volume = 0.1f
 
-        // Stop audio playing
         if (mediaPlayer != null) {
             mediaPlayer?.stop()
             mediaPlayer?.release()
@@ -206,7 +211,6 @@ class AlarmService : Service() {
         }
         NotificationManagerCompat.from(this).cancel(notificationId)
 
-        // Stop vibrator
         vibrator?.cancel()
         NotificationManagerCompat.from(this).cancel(notificationId)
 
@@ -215,6 +219,15 @@ class AlarmService : Service() {
             `package` = packageName
         }
         sendBroadcast(closeAlarmAlertIntent)
+    }
+
+    private fun createFallbackNotification(context: Context): Notification {
+        return NotificationCompat.Builder(context, NotificationHelper.ALARM_CHANNEL)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(context.getString(R.string.alarm))
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .build()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
