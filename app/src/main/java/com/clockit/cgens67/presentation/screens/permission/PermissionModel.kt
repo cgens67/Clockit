@@ -15,7 +15,7 @@ class PermissionModel(application: Application) : AndroidViewModel(application) 
     val missingPermissions: StateFlow<List<Permission>> = flow {
         while (true) {
             emit(allPermissions.filter { !it.hasPermission(application) })
-            delay(1000)
+            delay(500)
         }
     }.stateIn(
         scope = viewModelScope,
@@ -27,6 +27,7 @@ class PermissionModel(application: Application) : AndroidViewModel(application) 
         val allPermissions = listOf(
             Permission.AlarmPermission,
             Permission.NotificationPermission,
+            Permission.FullScreenIntentPermission,
             Permission.BatteryOptimizationPermission
         )
     }
