@@ -112,9 +112,9 @@ fun AlarmCard(
                         }
 
                         else -> {
-                            val daysOfWeek = remember {
-                                AlarmHelper.getDaysOfWeekByLocale(context)
-                            }
+                            // Non-remembered to ensure it reflects setting updates right away!
+                            val daysOfWeek = AlarmHelper.getDaysOfWeekByLocale(context)
+                            
                             daysOfWeek.forEach { (day, index) ->
                                 val enabled = alarm.days.contains(index)
                                 Text(
