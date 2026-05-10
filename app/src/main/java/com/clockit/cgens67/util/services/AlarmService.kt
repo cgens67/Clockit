@@ -31,7 +31,10 @@ import com.clockit.cgens67.presentation.screens.alarm.AlarmActivity
 import com.clockit.cgens67.util.AlarmHelper
 import com.clockit.cgens67.util.NotificationHelper
 import com.clockit.cgens67.util.receivers.PreAlarmReceiver
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Timer
 import java.util.TimerTask
 
@@ -60,7 +63,6 @@ class AlarmService : Service() {
     private val alarmActionReceiver = object : BroadcastReceiver() {
         @RequiresApi(Build.VERSION_CODES.M)
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("AlarmService", "Alarm Action Received")
             when (intent?.getStringExtra(ACTION_EXTRA_KEY)) {
                 DISMISS_ACTION -> {
                     currentAlarm?.let { alarm ->
@@ -88,7 +90,6 @@ class AlarmService : Service() {
             IntentFilter(ALARM_INTENT_ACTION),
             ContextCompat.RECEIVER_EXPORTED
         )
-
         super.onCreate()
     }
 
@@ -108,35 +109,44 @@ class AlarmService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val id = intent?.getLongExtra(AlarmHelper.EXTRA_ID, -1L)?.takeIf { it != -1L }
         
+        // Prevents ForegroundServiceStartNotAllowedException on Android 12+
+        startForeground(notificationId, createFallbackNotification(this))
+
         if (id == null) {
-            startForeground(notificationId, createFallbackNotification(this))
             stopSelf()
             return START_NOT_STICKY
         }
 
-        val alarmRepository = (application as App).container.alarmRepository
-        val alarm = runBlocking {
-            alarmRepository.getAlarmById(id)
-        } 
-        
-        if (alarm == null) {
-            startForeground(notificationId, createFallbackNotification(this))
-            stopSelf()
-            return START_NOT_STICKY
-        }
-
-        startForeground(notificationId, createNotification(this, alarm))
-        play(alarm)
-        currentAlarm = alarm
-        timer.schedule(object : TimerTask() {
-            @RequiresApi(Build.VERSION_CODES.M)
-            override fun run() {
-                currentAlarm?.let {
-                    AlarmHelper.snooze(this@AlarmService, it)
+        // Use CoroutineScope to safely fetch from DB without blocking the main thread
+        CoroutineScope(Dispatchers.IO).launch {
+            val alarmRepository = (application as App).container.alarmRepository
+            val alarm = alarmRepository.getAlarmById(id)
+            
+            withContext(Dispatchers.Main) {
+                if (alarm == null) {
+                    stopSelf()
+                    return@withContext
                 }
-                stopSelf()
+
+                val notificationManager = NotificationManagerCompat.from(this@AlarmService)
+                if (ContextCompat.checkSelfPermission(this@AlarmService, android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    notificationManager.notify(notificationId, createNotification(this@AlarmService, alarm))
+                }
+                
+                play(alarm)
+                currentAlarm = alarm
+                timer.schedule(object : TimerTask() {
+                    @RequiresApi(Build.VERSION_CODES.M)
+                    override fun run() {
+                        currentAlarm?.let {
+                            AlarmHelper.snooze(this@AlarmService, it)
+                        }
+                        stopSelf()
+                    }
+                }, AUTO_SNOOZE_MINUTES * 60 * 1000L)
             }
-        }, AUTO_SNOOZE_MINUTES * 60 * 1000L)
+        }
+        
         return START_STICKY
     }
 
@@ -166,8 +176,7 @@ class AlarmService : Service() {
         }
 
         if (alarm.vibrate) {
-            val vibrationPattern =
-                alarm.vibrationPattern.map(Int::toLong).toLongArray()
+            val vibrationPattern = alarm.vibrationPattern.map(Int::toLong).toLongArray()
             vibrator?.vibrate(vibrationPattern, 0)
         } else {
             vibrator?.cancel()
@@ -212,7 +221,6 @@ class AlarmService : Service() {
         NotificationManagerCompat.from(this).cancel(notificationId)
 
         vibrator?.cancel()
-        NotificationManagerCompat.from(this).cancel(notificationId)
 
         val closeAlarmAlertIntent = Intent(AlarmActivity.ALARM_ALERT_CLOSE_ACTION).apply {
             putExtra(AlarmActivity.ACTION_EXTRA_KEY, AlarmActivity.CLOSE_ACTION)
@@ -226,7 +234,9 @@ class AlarmService : Service() {
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(context.getString(R.string.alarm))
             .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setOngoing(true)
             .build()
     }
 
@@ -234,11 +244,9 @@ class AlarmService : Service() {
     private fun createNotification(context: Context, alarm: Alarm): Notification {
         cancelUpcomingAlarmNotifications()
         val alarmActivityIntent = Intent(context, AlarmActivity::class.java)
-            .addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK
-                        or Intent.FLAG_ACTIVITY_NO_USER_ACTION
-            )
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_USER_ACTION)
             .putExtra(AlarmHelper.EXTRA_ID, alarm.id)
+            
         val pendingIntent = PendingIntent.getActivity(
             this@AlarmService,
             0,
@@ -246,8 +254,7 @@ class AlarmService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val dismissAlarmIntent = Intent(ALARM_INTENT_ACTION)
-            .putExtra(ACTION_EXTRA_KEY, DISMISS_ACTION)
+        val dismissAlarmIntent = Intent(ALARM_INTENT_ACTION).putExtra(ACTION_EXTRA_KEY, DISMISS_ACTION)
         val onDeleteIntent = getPendingIntent(dismissAlarmIntent, 1)
 
         val dismissIntent = Intent(ALARM_INTENT_ACTION).putExtra(ACTION_EXTRA_KEY, DISMISS_ACTION)
@@ -264,7 +271,7 @@ class AlarmService : Service() {
             getPendingIntent(snoozeIntent, 3)
         )
 
-        val builder = NotificationCompat.Builder(context, NotificationHelper.ALARM_CHANNEL)
+        return NotificationCompat.Builder(context, NotificationHelper.ALARM_CHANNEL)
             .apply {
                 setSmallIcon(R.drawable.ic_notification)
                 setContentTitle(alarm.label ?: context.getString(R.string.alarm))
@@ -277,9 +284,7 @@ class AlarmService : Service() {
                 addAction(dismissAction.build())
                 setDeleteIntent(onDeleteIntent)
                 setOngoing(true)
-            }
-
-        return builder.build()
+            }.build()
     }
 
     private fun getPendingIntent(intent: Intent, requestCode: Int): PendingIntent =
