@@ -100,7 +100,6 @@ class TimerService : Service() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            Log.e("receive", intent.toString())
             val id = intent.getIntExtra(ID_EXTRA_KEY, 0)
             val obj = timerObjects.find { it.id == id } ?: return
             when (intent.getStringExtra(ACTION_EXTRA_KEY)) {
@@ -144,7 +143,7 @@ class TimerService : Service() {
                 mediaPlayer?.setDataSource(this, alert)
                 mediaPlayer?.let { startAlarm(it) }
             } catch (e: Exception) {
-                Log.e("failed to play ringtone", e.message, e)
+                Log.e("failed to play ringtone", e.message.toString(), e)
             }
         }
         if (timerObject.vibrate) {
@@ -205,8 +204,10 @@ class TimerService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
         if (intent?.action == ACTION_TIMER_EXPIRED) {
+            // Provides FGS compliance so we do not crash when started from TimerAlarmReceiver background exact alarm
+            startForeground(notificationId, getStartNotification())
+
             val id = intent.getIntExtra(ID_EXTRA_KEY, 0)
             timerObjects.find { it.id == id }?.let {
                 if (it.state.value == WatchState.RUNNING) {
