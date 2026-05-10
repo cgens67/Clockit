@@ -17,12 +17,12 @@ import com.clockit.cgens67.util.receivers.PreAlarmReceiver
 import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar
-//schweiny ass file
+
 object AlarmHelper {
     const val EXTRA_ID = "alarm_id"
     private const val DAYS_PER_WEEK = 7
     const val PRE_ALARM_ID_OFFSET = 4000
-    private const val PRE_ALARM_DELAY = 10800000L  //CHANGE this to change delay maybe in settings later BUDDY
+    private const val PRE_ALARM_DELAY = 10800000L  // 3 hours
 
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("ScheduleExactAlarm")
@@ -67,18 +67,11 @@ object AlarmHelper {
         val mainIntent = Intent(context.applicationContext,
             AlarmReceiver::class.java).putExtra(EXTRA_ID, id)
 
-
-
-
         val mainPi = PendingIntent.getBroadcast(context.applicationContext,
             id.toInt(), mainIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         val preIntent = Intent(context.applicationContext,
             PreAlarmReceiver::class.java).putExtra(EXTRA_ID, id)
-
-
-
-
 
         val prePi = PendingIntent.getBroadcast(context.applicationContext,
             id.toInt() + PRE_ALARM_ID_OFFSET, preIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
@@ -93,7 +86,6 @@ object AlarmHelper {
         return PendingIntent.getBroadcast(context.applicationContext, alarm.id.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 
-
     private fun getPreAlarmPendingIntent(context: Context, alarm: Alarm): PendingIntent {
         val intent = Intent(context.applicationContext,
             PreAlarmReceiver::class.java).putExtra(EXTRA_ID, alarm.id)
@@ -101,17 +93,16 @@ object AlarmHelper {
             alarm.id.toInt() + PRE_ALARM_ID_OFFSET, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 
-
     private fun getOpenAppIntent(context: Context, alarm: Alarm): PendingIntent {
         val intent = Intent(context.applicationContext,
             MainActivity::class.java).putExtra(EXTRA_ID, alarm.id)
         return PendingIntent.getActivity(context.applicationContext,
             alarm.id.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
+
     /**
      * Calculate the epoch time for scheduling an alarm
      */
-
     fun getAlarmTime(alarm: Alarm, skipToday: Boolean = false): Long {
         val calendar = GregorianCalendar()
         calendar.set(Calendar.HOUR_OF_DAY, 0)
@@ -156,14 +147,22 @@ object AlarmHelper {
         val newTime = (hours * 60 + minutes) * 60 * 1000L
         enqueue(context, oldAlarm.copy(time = newTime, enabled = true, repeat = false))
     }
+
     /**
      * @return the days of the week mapped to an index 0-Sunday, 1-Monday, ..., 6-Saturday.
      * The list order will match the user preferred days of the week order.
      */
-
     fun getDaysOfWeekByLocale(context: Context): List<Pair<String, Int>> {
         val availableDays = context.resources.getStringArray(R.array.available_days).toList()
-        val firstDayIndex = GregorianCalendar().firstDayOfWeek - 1
+        
+        val pref = Preferences.instance.getString("firstDayOfWeek", "System")
+        val firstDayIndex = when (pref) {
+            "Sunday" -> Calendar.SUNDAY - 1
+            "Monday" -> Calendar.MONDAY - 1
+            "Saturday" -> Calendar.SATURDAY - 1
+            else -> GregorianCalendar().firstDayOfWeek - 1
+        }
+        
         val daysWithIndex = availableDays.mapIndexed { index, s -> s to index }
         return daysWithIndex.subList(firstDayIndex, 7) + daysWithIndex.subList(0, firstDayIndex)
     }
