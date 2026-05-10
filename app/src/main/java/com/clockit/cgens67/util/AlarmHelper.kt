@@ -123,7 +123,7 @@ object AlarmHelper {
         if (alarm.days.isEmpty() && alarm.repeat) return 0
 
         val currentTime = GregorianCalendar().apply { time = TimeHelper.currentDateTime }
-        val currentDay = currentTime.get(Calendar.DAY_OF_WEEK) - 1
+        val currentDay = currentTime.get(Calendar.DAY_OF_WEEK) - 1 // 0 (Sunday) through 6 (Saturday)
         val currentHour = currentTime.get(Calendar.HOUR_OF_DAY)
         val currentMinute = currentTime.get(Calendar.MINUTE)
         val alarmTime = TimeHelper.millisToTime(alarm.time)
@@ -131,6 +131,7 @@ object AlarmHelper {
         val hasEventPassed = skipToday || currentHour > alarmTime.hours ||
                 (alarmTime.hours == currentHour && currentMinute >= alarmTime.minutes)
 
+        // Return 0 if the alarm is matching today and the time hasn't passed
         if ((currentDay in alarm.days || !alarm.repeat) && !hasEventPassed) return 0
         if (!alarm.repeat) return 1
 
@@ -157,9 +158,9 @@ object AlarmHelper {
         
         val pref = Preferences.instance.getString("firstDayOfWeek", "System")
         val firstDayIndex = when (pref) {
-            "Sunday" -> Calendar.SUNDAY - 1
-            "Monday" -> Calendar.MONDAY - 1
-            "Saturday" -> Calendar.SATURDAY - 1
+            "Sunday" -> Calendar.SUNDAY - 1 // 0
+            "Monday" -> Calendar.MONDAY - 1 // 1
+            "Saturday" -> Calendar.SATURDAY - 1 // 6
             else -> GregorianCalendar().firstDayOfWeek - 1
         }
         
