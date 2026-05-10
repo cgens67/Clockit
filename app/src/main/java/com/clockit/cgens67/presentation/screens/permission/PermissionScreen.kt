@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,6 +30,8 @@ fun PermissionScreen(onClose: () -> Unit) {
     val activity = context as MainActivity
     val missingPermissions by permissionModel.missingPermissions.collectAsState()
 
+    val allGranted = missingPermissions.isEmpty()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -43,19 +44,32 @@ fun PermissionScreen(onClose: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(32.dp))
+            
+            Icon(
+                imageVector = Icons.Rounded.CheckCircle,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp),
+                tint = if (allGranted) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
             Text(
-                text = "Permissions",
-                style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
+                text = if (allGranted) "All Set!" else "Permissions Required",
+                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center
             )
+            
             Spacer(modifier = Modifier.height(8.dp))
+            
             Text(
-                text = "Clockit needs a few permissions to work perfectly.",
+                text = if (allGranted) "Clockit has all the permissions it needs to work perfectly." else "Clockit needs a few permissions to ensure your alarms and timers go off exactly when you want them to.",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
             )
+            
             Spacer(modifier = Modifier.height(32.dp))
 
             LazyColumn(
@@ -83,10 +97,14 @@ fun PermissionScreen(onClose: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(64.dp),
-                shape = RoundedCornerShape(32.dp)
+                shape = RoundedCornerShape(32.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (allGranted) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = if (allGranted) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+                )
             ) {
                 Text(
-                    text = "Continue",
+                    text = if (allGranted) "Get Started" else "Skip & Continue",
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -130,12 +148,12 @@ fun PermissionCard(
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = stringResource(id = permission.titleRes),
+                    text = permission.title,
                     style = MaterialTheme.typography.titleMedium,
                     color = if (isGranted) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = stringResource(id = permission.descriptionRes),
+                    text = permission.description,
                     style = MaterialTheme.typography.bodyMedium,
                     color = if (isGranted) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurfaceVariant
                 )
