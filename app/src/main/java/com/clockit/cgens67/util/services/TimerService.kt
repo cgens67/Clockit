@@ -10,7 +10,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
@@ -23,6 +22,7 @@ import android.os.Vibrator
 import android.text.format.DateUtils
 import android.util.Log
 import androidx.annotation.StringRes
+import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -60,6 +60,9 @@ class TimerService : Service() {
 
         val intent = Intent(this, TimerAlarmReceiver::class.java).apply {
             putExtra(ID_EXTRA_KEY, timerObject.id)
+            putExtra("label", timerObject.label.value)
+            putExtra("ringtone", timerObject.ringtone?.toString())
+            putExtra("vibrate", timerObject.vibrate)
             action = ACTION_TIMER_EXPIRED
         }
         val pendingIntent = PendingIntent.getBroadcast(
@@ -69,7 +72,6 @@ class TimerService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         val triggerTime = System.currentTimeMillis() + timerObject.currentPosition.value
-
         val alarmInfo = AlarmManager.AlarmClockInfo(triggerTime, pendingIntent)
 
         try {
@@ -119,12 +121,10 @@ class TimerService : Service() {
 
                 TIMER_RESTART -> {
                     obj.currentPosition.value = obj.initialPosition
-
                     cancelAlarm(obj)
                     if (obj.state.value == WatchState.RUNNING) {
                         scheduleAlarm(obj)
                     }
-
                     updateNotification(obj)
                 }
             }
@@ -143,7 +143,7 @@ class TimerService : Service() {
                 mediaPlayer?.setDataSource(this, alert)
                 mediaPlayer?.let { startAlarm(it) }
             } catch (e: Exception) {
-                Log.e("failed to play ringtone", e.message.toString(), e)
+                Log.e("TimerService", "Failed to play ringtone", e)
             }
         }
         if (timerObject.vibrate) {
@@ -209,13 +209,25 @@ class TimerService : Service() {
             startForeground(notificationId, getStartNotification())
 
             val id = intent.getIntExtra(ID_EXTRA_KEY, 0)
-            timerObjects.find { it.id == id }?.let {
-                if (it.state.value == WatchState.RUNNING) {
-                    it.currentPosition.value = 0
-                    it.state.value = WatchState.PAUSED
-                    showFinishedNotification(it)
-                    play(it)
-                }
+            val label = intent.getStringExtra("label") ?: "Timer"
+            val ringtoneStr = intent.getStringExtra("ringtone")
+            val vibrate = intent.getBooleanExtra("vibrate", false)
+
+            val existing = timerObjects.find { it.id == id }
+            val obj = existing ?: TimerObject(
+                id = id,
+                label = mutableStateOf(label),
+                currentPosition = mutableStateOf(0),
+                state = mutableStateOf(WatchState.PAUSED),
+                ringtone = ringtoneStr?.let { Uri.parse(it) },
+                vibrate = vibrate
+            ).also { timerObjects.add(it) }
+
+            if (obj.state.value == WatchState.RUNNING || existing == null) {
+                obj.currentPosition.value = 0
+                obj.state.value = WatchState.PAUSED
+                showFinishedNotification(obj)
+                play(obj)
             }
             return START_STICKY
         }
@@ -329,12 +341,6 @@ class TimerService : Service() {
     }
 
     private fun showFinishedNotification(timerObject: TimerObject) {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) return
-
         val ringtoneUri = timerObject.ringtone ?: RingtoneHelper().getDefault(this)
         val vibrationPattern = NotificationHelper.vibrationPattern.takeIf { timerObject.vibrate }
         val notificationChannelId =
@@ -383,12 +389,14 @@ class TimerService : Service() {
             .setDeleteIntent(deleteNotificationChannelPendingIntent)
             .setOngoing(true)
             .addAction(stopAction)
+            .setFullScreenIntent(stopPendingIntent, true)
             .build().apply {
                 flags = flags or NotificationCompat.FLAG_INSISTENT
             }
 
-        NotificationManagerCompat.from(this)
-            .notify(notificationId, notification)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            NotificationManagerCompat.from(this).notify(notificationId, notification)
+        }
     }
 
     private fun pauseResumeAction(timerObject: TimerObject): NotificationCompat.Action {
