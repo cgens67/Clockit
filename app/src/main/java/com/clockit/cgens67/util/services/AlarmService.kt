@@ -24,7 +24,6 @@ import androidx.core.app.NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import com.clockit.cgens67.App
 import com.clockit.cgens67.R
 import com.clockit.cgens67.domain.model.Alarm
@@ -43,7 +42,6 @@ class AlarmService : Service() {
     private var mediaPlayer: MediaPlayer? = null
     private var currentAlarm: Alarm? = null
 
-
     val timer = Timer()
 
     private var volume: Float = 0.1f
@@ -52,7 +50,7 @@ class AlarmService : Service() {
     private val volumeRunnable = object : Runnable {
         override fun run() {
             if (volume < MAX_VOLUME) {
-                mediaPlayer!!.setVolume(volume, volume)
+                mediaPlayer?.setVolume(volume, volume)
                 volume += VOLUME_INCREASE_STEP
                 volumeHandler.postDelayed(this, VOLUME_INCREASE_INTERVAL)
             }
@@ -96,7 +94,6 @@ class AlarmService : Service() {
     }
 
     override fun onDestroy() {
-
         stop()
         timer.cancel()
         unregisterReceiver(alarmActionReceiver)
@@ -107,7 +104,6 @@ class AlarmService : Service() {
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -122,46 +118,50 @@ class AlarmService : Service() {
         play(alarm)
         currentAlarm = alarm
         timer.schedule(object : TimerTask() {
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun run() {
+                currentAlarm?.let {
+                    AlarmHelper.snooze(this@AlarmService, it)
+                }
                 stopSelf()
             }
-        }, AUTO_SNOOZE_MINUTES * 60 * 1000L, AUTO_SNOOZE_MINUTES * 60 * 1000L)
+        }, AUTO_SNOOZE_MINUTES * 60 * 1000L)
         return START_STICKY
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun play(alarm: Alarm) {
         // stop() checks to see if we are already playing.
         stop()
         if (alarm.soundEnabled) {
-            val alert: Uri? = alarm.soundUri?.toUri() ?: RingtoneManager.getDefaultUri(
+            val alert: Uri? = alarm.soundUri?.let { Uri.parse(it) } ?: RingtoneManager.getDefaultUri(
                 RingtoneManager.TYPE_ALARM
             )
-            mediaPlayer = MediaPlayer()
-            mediaPlayer!!.setOnErrorListener { mp, _, _ ->
-                Log.e("Media Player", "Error occurred while playing audio.")
-                mp.stop()
-                mp.release()
-                mediaPlayer = null
-                true
-            }
-            try {
-                mediaPlayer!!.setDataSource(this, alert!!)
-                startAlarm(mediaPlayer!!)
-            } catch (e: Exception) {
-                Log.e("Failed to play ringtone", e.message, e)
+            if (alert != null) {
+                mediaPlayer = MediaPlayer()
+                mediaPlayer?.setOnErrorListener { mp, _, _ ->
+                    Log.e("Media Player", "Error occurred while playing audio.")
+                    mp.stop()
+                    mp.release()
+                    mediaPlayer = null
+                    true
+                }
+                try {
+                    mediaPlayer?.setDataSource(this, alert)
+                    mediaPlayer?.let { startAlarm(it) }
+                } catch (e: Exception) {
+                    Log.e("Failed to play ringtone", e.message, e)
+                }
             }
         }
-
 
         /* Start the vibrator after everything is ok with the media player */
         if (alarm.vibrate) {
             val vibrationPattern =
                 alarm.vibrationPattern.map(Int::toLong).toLongArray()
-            vibrator!!.vibrate(vibrationPattern, 0)
+            vibrator?.vibrate(vibrationPattern, 0)
         } else {
-            vibrator!!.cancel()
+            vibrator?.cancel()
         }
         isPlaying = true
     }
@@ -174,17 +174,17 @@ class AlarmService : Service() {
 
         volumeHandler.post(volumeRunnable)
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+
     @SuppressLint("ServiceCast")
     private fun cancelUpcomingAlarmNotifications() {
         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             nm.activeNotifications.forEach { statusBarNotification ->
                 if (statusBarNotification.notification.channelId == PreAlarmReceiver.CHANNEL_ID) {
                     nm.cancel(statusBarNotification.tag, statusBarNotification.id)
                 }
             }
-
+        }
     }
 
     /**
@@ -206,8 +206,6 @@ class AlarmService : Service() {
         }
         NotificationManagerCompat.from(this).cancel(notificationId)
 
-
-
         // Stop vibrator
         vibrator?.cancel()
         NotificationManagerCompat.from(this).cancel(notificationId)
@@ -221,7 +219,7 @@ class AlarmService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotification(context: Context, alarm: Alarm): Notification {
-    cancelUpcomingAlarmNotifications()
+        cancelUpcomingAlarmNotifications()
         val alarmActivityIntent = Intent(context, AlarmActivity::class.java)
             .addFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK
@@ -254,11 +252,9 @@ class AlarmService : Service() {
         )
 
         val builder = NotificationCompat.Builder(context, NotificationHelper.ALARM_CHANNEL)
-
             .apply {
                 setSmallIcon(R.drawable.ic_notification)
                 setContentTitle(alarm.label ?: context.getString(R.string.alarm))
-                // setSilent(true)  // This setting causes the full screen intent to not work properly
                 setAutoCancel(true)
                 priority = NotificationCompat.PRIORITY_MAX
                 foregroundServiceBehavior = FOREGROUND_SERVICE_IMMEDIATE
