@@ -4,8 +4,8 @@
 <!-- ---------- Header ---------- -->
 <div align="center">
   <img width="200" height="200" src="fastlane/metadata/android/en-US/images/icon.png">
-  <h1>Clock You</h1>
-<p>Privacy focused clock app built with MD3.</p>
+  <h1>Clockit</h1>
+<p>Privacy focused clock app built with MD3E.</p>
 
 <!-- ---------- Badges ---------- -->
   <div align="center">
@@ -21,7 +21,7 @@
 <!-- ---------- Description ---------- -->
 ## Features
 
-- [x] Material Design 3 (You)
+- [x] Material Design 3 Expressive
 - [x] Dark and light theme
 - [X] Integrated clock, alarm, timer and stopwatch
 - [X] Convenient user interface
