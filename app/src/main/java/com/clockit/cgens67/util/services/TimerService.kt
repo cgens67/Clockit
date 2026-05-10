@@ -33,6 +33,7 @@ import com.clockit.cgens67.domain.model.TimerObject
 import com.clockit.cgens67.domain.model.WatchState
 import com.clockit.cgens67.util.NotificationHelper
 import com.clockit.cgens67.util.RingtoneHelper
+import com.clockit.cgens67.util.receivers.TimerAlarmReceiver
 
 import java.util.Timer
 import java.util.TimerTask
@@ -53,9 +54,7 @@ class TimerService : Service() {
 
     var timerObjects = mutableListOf<TimerObject>()
 
-
     @SuppressLint("ServiceCast", "ScheduleExactAlarm")
-
     private fun scheduleAlarm(timerObject: TimerObject) {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -108,8 +107,6 @@ class TimerService : Service() {
                 ACTION_STOP -> {
                     stop(obj, cancelled = true)
                     stopForeground(true)
-
-
                 }
 
                 ACTION_PAUSE_RESUME -> {
@@ -130,31 +127,25 @@ class TimerService : Service() {
                     }
 
                     updateNotification(obj)
-
-                    //the android api alarm doesnt restart with this!!!!! DANGER D:::: OH NOES WERE GONNA DIEEEEEEEEE D: ARGHHHH
-                    // it does now were saveddddddddddddddddddddddddddddd.... hold up the pause gotta be bugged D:, noooooooooooooooooooooooooooooooooooooooooooooooooooooooo AAGHHHHHHHHHHHHH ARGHHHh
-                    // it i snt even TWT
-
-
                 }
             }
         }
     }
 
-
     private fun play(timerObject: TimerObject) {
         stopAudio()
-        val alert: Uri = timerObject.ringtone ?: RingtoneManager.getDefaultUri(
+        val alert: Uri? = timerObject.ringtone ?: RingtoneManager.getDefaultUri(
             RingtoneManager.TYPE_ALARM
         )
 
-        mediaPlayer = MediaPlayer()
-
-        try {
-            mediaPlayer!!.setDataSource(this, alert)
-            startAlarm(mediaPlayer!!)
-        } catch (e: Exception) {
-            Log.e("failed to play ringtone", e.message, e)
+        if (alert != null) {
+            mediaPlayer = MediaPlayer()
+            try {
+                mediaPlayer?.setDataSource(this, alert)
+                mediaPlayer?.let { startAlarm(it) }
+            } catch (e: Exception) {
+                Log.e("failed to play ringtone", e.message, e)
+            }
         }
         if (timerObject.vibrate) {
             val pattern = longArrayOf(0, 500, 500)
@@ -172,9 +163,6 @@ class TimerService : Service() {
         player.start()
     }
 
-    /**
-     * Stops the audio and vibration
-     */
     private fun stopAudio() {
         if (!isPlaying) return
         isPlaying = false
@@ -188,23 +176,17 @@ class TimerService : Service() {
         vibrator.cancel()
     }
 
-
     private var wakeLock: PowerManager.WakeLock? = null
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate() {
         super.onCreate()
 
-        //maybe keeps the phone on so timer works? pls pls pls
         val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
         wakeLock =
             powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TimerService::Lock").apply {
                 acquire(10 * 60 * 1000L /*10 minutes*/)
             }
-
-
-
-
 
         timer.schedule(
             object : TimerTask() {
@@ -227,9 +209,12 @@ class TimerService : Service() {
         if (intent?.action == ACTION_TIMER_EXPIRED) {
             val id = intent.getIntExtra(ID_EXTRA_KEY, 0)
             timerObjects.find { it.id == id }?.let {
-                showFinishedNotification(it)
-                play(it)
-                it.state.value = WatchState.PAUSED
+                if (it.state.value == WatchState.RUNNING) {
+                    it.currentPosition.value = 0
+                    it.state.value = WatchState.PAUSED
+                    showFinishedNotification(it)
+                    play(it)
+                }
             }
             return START_STICKY
         }
@@ -271,7 +256,6 @@ class TimerService : Service() {
         .addAction(pauseResumeAction(timerObject))
         .addAction(restarttimer(timerObject))
         .addAction(add5MinAction(timerObject))
-
         .setSmallIcon(R.drawable.ic_notification)
         .setOngoing(true)
         .build()
@@ -283,15 +267,17 @@ class TimerService : Service() {
     private fun updateState() {
         timerObjects.forEach {
             if (it.state.value == WatchState.RUNNING) {
-
                 it.currentPosition.value -= UPDATE_DELAY
 
-
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                if (it.currentPosition.value <= 0) {
+                    it.currentPosition.value = 0
+                    it.state.value = WatchState.PAUSED
+                    showFinishedNotification(it)
+                    play(it)
+                } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                     updateNotification(it)
                 }
             }
-
         }
     }
 
@@ -305,12 +291,10 @@ class TimerService : Service() {
         updateNotification(timerObject)
     }
 
-
     private fun pause(timerObject: TimerObject) {
         timerObject.state.value = WatchState.PAUSED
         cancelAlarm(timerObject)
         updateNotification(timerObject)
-
     }
 
     private fun resume(timerObject: TimerObject) {
@@ -343,7 +327,6 @@ class TimerService : Service() {
         if (timerObjects.isEmpty()) stopSelf()
     }
 
-
     private fun showFinishedNotification(timerObject: TimerObject) {
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -356,7 +339,6 @@ class TimerService : Service() {
         val notificationChannelId =
             NotificationHelper.TIMER_FINISHED_CHANNEL + "-" + System.currentTimeMillis()
         val notificationId = (Integer.MAX_VALUE / 3) + timerObject.id * 10
-
 
         val deleteNotificationChannelIntent = NotificationHelper.createDynamicChannel(
             this,
@@ -407,7 +389,6 @@ class TimerService : Service() {
         NotificationManagerCompat.from(this)
             .notify(notificationId, notification)
     }
-
 
     private fun pauseResumeAction(timerObject: TimerObject): NotificationCompat.Action {
         val text =
@@ -497,7 +478,6 @@ class TimerService : Service() {
     inner class LocalBinder : Binder() {
         fun getService() = this@TimerService
     }
-
 
     companion object {
         const val UPDATE_STATE_ACTION = "com.clockit.cgens67.UPDATE_STATE"
