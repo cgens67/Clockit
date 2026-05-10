@@ -123,9 +123,8 @@ fun AlarmPicker(currentAlarm: Alarm, onSave: (Alarm) -> Unit, onCancel: () -> Un
                             .padding(16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        val daysOfWeek = remember {
-                            AlarmHelper.getDaysOfWeekByLocale(context)
-                        }
+                        // Dynamically update without remember
+                        val daysOfWeek = AlarmHelper.getDaysOfWeekByLocale(context)
 
                         daysOfWeek.forEach { (day, index) ->
                             val enabled = chosenDays.contains(index)
